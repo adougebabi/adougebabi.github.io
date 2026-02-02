@@ -121,7 +121,7 @@ This file is in BETA. Please test and contribute to the discussion:
           <h2>Recent Items</h2>
           <xsl:for-each select="/rss/channel/item">
             <div class="pb-0 pt-5 border-rounded">
-              <img class="mb-3" style="max-width: 100%;" >
+              <img class="mb-0" style="max-width: 100%;" >
                 <xsl:attribute name="src">
                   <xsl:value-of select="enclosure/@url"/>
                 </xsl:attribute>
@@ -129,7 +129,7 @@ This file is in BETA. Please test and contribute to the discussion:
                   <xsl:attribute name="style">display: none;</xsl:attribute>
                 </xsl:if>
               </img>
-              <h3 class="mb-0">
+              <h3 class="mb-0 mt-0">
                 <a target="_blank">
                   <xsl:attribute name="href">
                     <xsl:value-of select="link"/>
