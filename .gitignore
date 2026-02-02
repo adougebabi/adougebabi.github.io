@@ -33,3 +33,6 @@ public/assets/blog/*
 .frontmatter/database/
 .frontmatter/*
 .vscode/settings.json
+
+# CloudFlare Wrangler
+.wrangler/*
