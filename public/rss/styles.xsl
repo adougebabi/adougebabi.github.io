@@ -120,7 +120,7 @@ This file is in BETA. Please test and contribute to the discussion:
           </header>
           <h2>Recent Items</h2>
           <xsl:for-each select="/rss/channel/item">
-            <div class="pb-0 pt-5">
+            <div class="pb-0 pt-5 border-rounded">
               <img class="mb-3" style="max-width: 100%;" >
                 <xsl:attribute name="src">
                   <xsl:value-of select="enclosure/@url"/>
