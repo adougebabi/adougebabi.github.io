@@ -87,6 +87,11 @@ interface Behavior {
   //   enable: boolean;
   //   excludeHtmlTags: string[];
   // };
+  rss: {
+    enable: boolean;
+    protectContent: boolean;
+    enableStylesheet: boolean;
+  };
 }
 
 interface Style {

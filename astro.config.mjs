@@ -2,7 +2,6 @@
 
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import partytown from "@astrojs/partytown";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
@@ -39,7 +38,11 @@ import devtoolBreakpoints from "astro-devtool-breakpoints";
 
 import path from "path";
 import { fileURLToPath } from "url";
+import { config as loadEnv } from "dotenv";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Load environment variables from .env file
+loadEnv();
 
 // https://astro.build/config
 export default defineConfig({
@@ -57,12 +60,6 @@ export default defineConfig({
     }),
     react(),
     pagefind(),
-    partytown({
-      // Optional: Add config options here
-      config: {
-        forward: ["dataLayer.push", "gtag"],
-      },
-    }),
     metaTags(),
     devtoolBreakpoints(),
   ],

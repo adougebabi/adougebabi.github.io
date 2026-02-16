@@ -68,7 +68,12 @@ const FAVICON = config.favicon || "/favicon.svg";
 {config.style.enableTransitions && <ClientRouter />}
 
 <!-- Google Tag Manager -->
-<script is:inline type="text/partytown">
+<script
+  async
+  define:vars={{
+    gtmId: config.behavior.gtmConfig.googleTagManagerId,
+  }}
+>
   (function (w, d, s, l, i) {
     w[l] = w[l] || [];
     w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -78,15 +83,6 @@ const FAVICON = config.favicon || "/favicon.svg";
     j.async = true;
     j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
     f.parentNode.insertBefore(j, f);
-  })(
-    window,
-    document,
-    "script",
-    "dataLayer",
-    config.behavior.gtmConfig.googleTagManagerId,
-  );
+  })(window, document, "script", "dataLayer", gtmId);
 </script>
 <!-- End Google Tag Manager -->
-
-<!-- 在 </head> 或 </body> 前加入 -->
-<!-- <script is:inline src="/pagefind/pagefind.js"></script> -->

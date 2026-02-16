@@ -352,6 +352,13 @@ const config: ShBlogConfig = {
     //   注意：修改這些設定可能需要重新啟動開發伺服器（或重新建置網站）以生效
     //   請前往 src/plugins/rehype-pangu.mjs 中修改設定
     // panguJs: {};
+
+    // RSS 設定
+    rss: {
+      enable: true, // 是否啟用 RSS 功能
+      protectContent: true, // 是否在 RSS 內容中保護文章內容，啟用後將只顯示文章摘要，防止全文被抓取
+      enableStylesheet: true, // 是否為 RSS 提供 XSLT 樣式表以改善在瀏覽器中的閱讀體驗
+    },
   },
 
   // 頁尾設定
