@@ -26,7 +26,7 @@ const { title, description, coverImage } = Astro.props;
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="你的网站标题"
+      title={config.title}
       href={new URL("rss.xml", Astro.site)}
     />
   </head>
