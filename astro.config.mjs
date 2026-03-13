@@ -79,6 +79,7 @@ export default defineConfig({
 
   experimental: {
     svgo: true,
+    // rustCompiler: true,    // 啟用 Rust 編譯器以提升構建性能（需要安裝 @astrojs/compiler-rs 包）
   },
 
   markdown: {
