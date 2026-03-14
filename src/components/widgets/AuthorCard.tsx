@@ -1,8 +1,8 @@
 import { Card } from "@ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@ui/avatar";
-import React from "react";
-import * as SimpleIcons from "@icons-pack/react-simple-icons";
+import React, { useMemo, lazy } from "react";
+import { Button } from "@ui/button";
 
 interface LinksProp {
   icon: string;
@@ -27,6 +27,39 @@ const isImageUrl = (str: string): boolean => {
 const getSimpleIconComponentName = (iconName: string): string => {
   // 直接加上 "Si" 前綴，使用傳入的名稱，不再嘗試變更大小寫
   return `Si${iconName}`;
+};
+
+const DynamicIcon = ({
+  iconName,
+  size = 20,
+}: {
+  iconName: string;
+  size?: number;
+}) => {
+  // 使用 React.lazy 動態匯入對應的圖示
+  const IconComponent = useMemo(() => {
+    return lazy(() =>
+      import("@icons-pack/react-simple-icons")
+        .then((mod) => {
+          const componentName = `Si${iconName}`;
+          const Icon = mod[componentName as keyof typeof mod];
+          if (!Icon) throw new Error(`Icon ${componentName} not found`);
+          return { default: Icon as React.ComponentType<any> };
+        })
+        .catch(() => {
+          // 找不到圖示時的降級處理（例如回傳一個預設圖示）
+          return import("lucide-react").then((mod) => ({
+            default: mod.Earth,
+          }));
+        }),
+    );
+  }, [iconName]);
+
+  return (
+    <React.Suspense fallback={<div style={{ width: size, height: size }} />}>
+      <IconComponent size={size} />
+    </React.Suspense>
+  );
 };
 
 function AuthorCard({
@@ -67,37 +100,28 @@ function AuthorCard({
           <p className="text-sm">{description}</p>
           <div className="text-xs gap-2 flex flex-wrap mt-2">
             {links.map((link) => {
-              const isUrl = isImageUrl(link.icon);
-              let IconComponent:
-                | (React.ComponentType<{ size: number }>)
-                | undefined;
-
-              if (!isUrl) {
-                const iconComponentName = getSimpleIconComponentName(link.icon);
-                IconComponent = SimpleIcons[
-                  iconComponentName as keyof typeof SimpleIcons
-                ] as React.ComponentType<{ size: number }> | undefined;
-              }
               return (
                 <Tooltip key={link.label}>
                   <TooltipTrigger asChild>
-                    <a
-                      href={link.to}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={link.label}
-                      className="inline-flex items-center justify-center p-1 rounded transition-colors"
-                    >
-                      {isUrl ? (
-                        <img
-                          src={link.icon}
-                          alt=""
-                          className="w-5 h-5 object-contain"
-                        />
-                      ) : IconComponent ? (
-                        <IconComponent size={20} />
-                      ) : null}
-                    </a>
+                    <Button variant="ghost" size="icon">
+                      <a
+                        href={link.to}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={link.label}
+                        className="inline-flex items-center justify-center p-1 rounded transition-colors"
+                      >
+                        {isImageUrl(link.icon) ? (
+                          <img
+                            src={link.icon}
+                            alt=""
+                            className="w-4.5 h-4.5 object-contain"
+                          />
+                        ) : getSimpleIconComponentName(link.icon) ? (
+                          <DynamicIcon iconName={link.icon} size={18} />
+                        ) : null}
+                      </a>
+                    </Button>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>{link.label}</p>
