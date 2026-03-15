@@ -117,7 +117,7 @@ function AuthorCard({
                             alt=""
                             className="w-4.5 h-4.5 object-contain"
                           />
-                        ) : getSimpleIconComponentName(link.icon) ? (
+                        ) : link.icon ? (
                           <DynamicIcon iconName={link.icon} size={18} />
                         ) : null}
                       </a>
