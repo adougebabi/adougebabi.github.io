@@ -2,7 +2,8 @@ import { Card } from "@ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@ui/tooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@ui/avatar";
 import React, { useMemo, lazy } from "react";
-import { Button } from "@ui/button";
+import { buttonVariants } from "@ui/button";
+import { cn } from "@/lib/utils";
 
 interface LinksProp {
   icon: string;
@@ -99,36 +100,34 @@ function AuthorCard({
           <h4 className="text-sm font-semibold opacity-30">@{slug}</h4>
           <p className="text-sm">{description}</p>
           <div className="text-xs gap-2 flex flex-wrap mt-2">
-            {links.map((link) => {
-              return (
-                <Tooltip key={link.label}>
-                  <TooltipTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <a
-                        href={link.to}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={link.label}
-                        className="inline-flex items-center justify-center p-1 rounded transition-colors"
-                      >
-                        {isImageUrl(link.icon) ? (
-                          <img
-                            src={link.icon}
-                            alt=""
-                            className="w-4.5 h-4.5 object-contain"
-                          />
-                        ) : link.icon ? (
-                          <DynamicIcon iconName={link.icon} size={18} />
-                        ) : null}
-                      </a>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>{link.label}</p>
-                  </TooltipContent>
-                </Tooltip>
-              );
-            })}
+            {links.map((link) => (
+              <Tooltip key={link.label}>
+                <TooltipTrigger asChild>
+                  <a
+                    href={link.to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "icon" }),
+                    )}
+                  >
+                    {isImageUrl(link.icon) ? (
+                      <img
+                        src={link.icon}
+                        alt=""
+                        className="w-4.5 h-4.5 object-contain"
+                      />
+                    ) : link.icon ? (
+                      <DynamicIcon iconName={link.icon} size={18} />
+                    ) : null}
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{link.label}</p>
+                </TooltipContent>
+              </Tooltip>
+            ))}
           </div>
         </div>
       </div>
