@@ -1,5 +1,5 @@
 DirectoryPath: ./dist
-IgnoreFiles:
+IgnoreDirs:
   - .DS_Store
   - .gitignore
   - .htmltest.yml
@@ -11,12 +11,14 @@ IgnoreFiles:
   - /*.yml
   - shblog.*
   - node_modules
-CheckInternalLinks: true
-CheckExternalLinks: false
+CheckInternal: true
+CheckExternal: false
 CheckScripts: true
 CheckMeta: true
 CheckImages: true
 CheckFavicon: true
-IgnoreStatusCheckCode:
-  - 403 # Forbidden
-  - 429 # Too Many Requests
+
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreAltEmpty: true
+IgnoreURLs:
+  - ^https://gravatar\.com/.*
