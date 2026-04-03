@@ -91,7 +91,7 @@ export default function BlogCard({
               <div>
                 <a
                   className="hover:text-white transition-all font-mono text-sm text-neutral-400"
-                  href={`/blog/categories/${(Array.isArray(category) ? category[0] : category).toLowerCase()}`}
+                  href="#"
                   onClick={handleCategoryClick}
                 >
                   <span className="tracking-[0.5em]">
