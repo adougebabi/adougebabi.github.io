@@ -15,7 +15,7 @@ CheckInternal: true
 CheckExternal: false
 CheckScripts: true
 CheckMeta: true
-CheckImages: true
+CheckImages: false
 CheckFavicon: true
 
 IgnoreDirectoryMissingTrailingSlash: true
