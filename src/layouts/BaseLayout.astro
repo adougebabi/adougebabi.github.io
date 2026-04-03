@@ -1,13 +1,14 @@
 ---
-import BaseHead from "../core/BaseHead.astro";
-import Footer from "../core/Footer.astro";
-import Header from "../core/Header.astro";
-import { SITE_DESCRIPTION } from "../../consts.ts";
-import StickyButtons from "../global/StickyButtons.astro";
+import BaseHead from "../components/core/BaseHead.astro";
+import Footer from "../components/core/Footer.astro";
+import Header from "../components/core/Header.astro";
+import { SITE_DESCRIPTION } from "../consts.ts";
+import StickyButtons from "../components/global/StickyButtons.astro";
 import "lenis/dist/lenis.css";
 import config from "@shConfig";
 
-import "../../styles/global.css";
+import "../styles/global.css";
+import "../styles/view-transitions.css";
 
 const LANG = config.lang || "zh-Hant";
 

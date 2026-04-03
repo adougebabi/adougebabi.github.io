@@ -128,7 +128,7 @@ const config: ShBlogConfig = {
       "/assets/layouts/homepage/samhacker_homepage_background.webp", // 預設文章圖片，如果文章沒有指定封面就使用它
     postsPerPage: 6, // 首頁每頁顯示的文章數量
     titleSeparator: "-", // 網站標題分隔符號，會用在瀏覽器標籤和 SEO 中，例如 "文章標題 - 網站名稱"
-    enableTransitions: false, // 是否啟用頁面轉場動畫
+    enableTransitions: true, // 是否啟用頁面轉場動畫
     enableRecentPosts: false, // 是否在首頁顯示最新文章區塊
   },
 
@@ -254,7 +254,7 @@ const config: ShBlogConfig = {
     },
     {
       title: "璐沐",
-      imgUrl: "https://510208.github.io/assets/friend_photo/lumu.webp",
+      imgUrl: "https://510208.github.io/_astro/lumu.D0B4F3rQ.webp",
       desc: "一隻偏好新詩，古代詩的小鹿。畢竟才疏學淺，還需人們指點一番~",
       siteUrl: "https://www.penana.com/user/233957/%E7%92%90%E6%B2%90",
       tags: ["文學", "作家"],
@@ -279,6 +279,14 @@ const config: ShBlogConfig = {
       desc: "　",
       siteUrl: "https://emtech.cc/",
       tags: ["技術", "個人網站", "生活"],
+    },
+    {
+      title: "JN",
+      imgUrl:
+        "https://www.gravatar.com/avatar/6b4acff32864e0e522937ec26e016709db956e97f199b46968e0ddc7ce6b79e8",
+      desc: "資工系畢業，但其實沒有很會寫程式",
+      siteUrl: "https://blog.giveanornot.com/",
+      tags: ["技術", "生活"],
     },
   ],
 

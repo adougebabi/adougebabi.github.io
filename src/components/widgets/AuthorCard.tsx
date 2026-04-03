@@ -47,11 +47,12 @@ const DynamicIcon = ({
           if (!Icon) throw new Error(`Icon ${componentName} not found`);
           return { default: Icon as React.ComponentType<any> };
         })
-        .catch(() => {
+        .catch(async () => {
           // 找不到圖示時的降級處理（例如回傳一個預設圖示）
-          return import("lucide-react").then((mod) => ({
+          const mod = await import("lucide-react");
+          return {
             default: mod.Earth,
-          }));
+          };
         }),
     );
   }, [iconName]);

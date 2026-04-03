@@ -89,15 +89,15 @@ export default function BlogCard({
             {/* 文章分類 */}
             {category && (
               <div>
-                <a
+                {/* <a
                   className="hover:text-white transition-all font-mono text-sm text-neutral-400"
-                  href={`/blog/categories/${(Array.isArray(category) ? category[0] : category).toLowerCase()}`}
+                  href="#"
                   onClick={handleCategoryClick}
-                >
-                  <span className="tracking-[0.5em]">
-                    {Array.isArray(category) ? category[0] : category}
-                  </span>
-                </a>
+                > */}
+                <span className="tracking-[0.5em]">
+                  {Array.isArray(category) ? category[0] : category}
+                </span>
+                {/* </a> */}
               </div>
             )}
             {/* Title */}
