@@ -254,7 +254,7 @@ const config: ShBlogConfig = {
     },
     {
       title: "璐沐",
-      imgUrl: "https://510208.github.io/assets/friend_photo/lumu.webp",
+      imgUrl: "https://510208.github.io/_astro/lumu.D0B4F3rQ.webp",
       desc: "一隻偏好新詩，古代詩的小鹿。畢竟才疏學淺，還需人們指點一番~",
       siteUrl: "https://www.penana.com/user/233957/%E7%92%90%E6%B2%90",
       tags: ["文學", "作家"],
