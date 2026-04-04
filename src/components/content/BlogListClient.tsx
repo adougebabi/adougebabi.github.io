@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import BlogCard from "../widgets/BlogCard.tsx";
+import EmptyBlog from "../widgets/EmptyBlog.tsx";
 import {
   Pagination,
   PaginationContent,
@@ -79,51 +80,57 @@ export default function BlogListClient({
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-3">
-        {paginated.map((post) => (
-          <BlogCard
-            key={post.id}
-            title={post.data.title}
-            description={post.data.description}
-            pubDate={post.data.pubDate.toISOString()}
-            heroImage={post.data.heroImage?.src || DEFAULT_POST_IMAGE}
-            category={post.data.category}
-            tags={post.data.tags}
-            href={`/blog/${post.id}/`}
-            isLoading={false}
-          />
-        ))}
-      </div>
+      {parsedPosts.length === 0 ? (
+        <EmptyBlog />
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-3">
+            {paginated.map((post) => (
+              <BlogCard
+                key={post.id}
+                title={post.data.title}
+                description={post.data.description}
+                pubDate={post.data.pubDate.toISOString()}
+                heroImage={post.data.heroImage?.src || DEFAULT_POST_IMAGE}
+                category={post.data.category}
+                tags={post.data.tags}
+                href={`/blog/${post.id}/`}
+                isLoading={false}
+              />
+            ))}
+          </div>
 
-      <Pagination className="mt-8">
-        <PaginationContent>
-          {currentPage > 1 && (
-            <PaginationItem>
-              <PaginationPrevious onClick={() => goto(currentPage - 1)} />
-            </PaginationItem>
-          )}
+          <Pagination className="mt-8">
+            <PaginationContent>
+              {currentPage > 1 && (
+                <PaginationItem>
+                  <PaginationPrevious onClick={() => goto(currentPage - 1)} />
+                </PaginationItem>
+              )}
 
-          {Array.from({ length: totalPages }).map((_, idx) => {
-            const page = idx + 1;
-            return (
-              <PaginationItem key={page}>
-                <PaginationLink
-                  onClick={() => goto(page)}
-                  isActive={page === currentPage}
-                >
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            );
-          })}
+              {Array.from({ length: totalPages }).map((_, idx) => {
+                const page = idx + 1;
+                return (
+                  <PaginationItem key={page}>
+                    <PaginationLink
+                      onClick={() => goto(page)}
+                      isActive={page === currentPage}
+                    >
+                      {page}
+                    </PaginationLink>
+                  </PaginationItem>
+                );
+              })}
 
-          {currentPage < totalPages && (
-            <PaginationItem>
-              <PaginationNext onClick={() => goto(currentPage + 1)} />
-            </PaginationItem>
-          )}
-        </PaginationContent>
-      </Pagination>
+              {currentPage < totalPages && (
+                <PaginationItem>
+                  <PaginationNext onClick={() => goto(currentPage + 1)} />
+                </PaginationItem>
+              )}
+            </PaginationContent>
+          </Pagination>
+        </>
+      )}
     </>
   );
 }
