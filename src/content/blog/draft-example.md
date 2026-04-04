@@ -6,7 +6,7 @@ heroImage: ../../assets/blog-placeholder-3.jpg
 tags:
   - 測試
   - draft
-category: ["範例"]
+category: ["範例分類"]
 draft: true
 ---
 

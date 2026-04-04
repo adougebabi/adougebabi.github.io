@@ -3,7 +3,7 @@ title: First post
 description: Lorem ipsum dolor sit amet
 pubDate: 2022-07-08T04:00:00.000Z
 heroImage: ../../assets/blog-placeholder-3.jpg
-category: Astro預設文章
+category: ["範例分類"]
 draft: false
 tags:
   - 範例標籤1
