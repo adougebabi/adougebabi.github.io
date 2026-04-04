@@ -24,11 +24,6 @@ pnpm-debug.log*
 .idea/
 wrangler.jsonc
 
-# 文章
-src/content/blog/*
-src/assets/blog/*
-public/assets/blog/*
-
 # Frontmatter CMS
 .frontmatter/database/
 .frontmatter/*
