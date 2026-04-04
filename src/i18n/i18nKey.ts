@@ -32,6 +32,10 @@ enum I18nKey {
   notfound_please_go_back_normal = "For more information about this issue and possible fixes, visit our homepage.",
   notfound_please_go_back_rickroll = "For more information about this issue and possible fixes, visit https://reurl.cc/jmEY8Z.",
   notfound_please_go_back_homo = "For detailed information on this issue and possible fixes, please review Silver Dream again. (surely",
+
+  // 部落格集合為空的通知訊息
+  empty_blog_title = "Where is the post?",
+  empty_blog_description = "Seems there is no post that is available to use, maybe you can create one... or copy some?",
 }
 
 export default I18nKey;
