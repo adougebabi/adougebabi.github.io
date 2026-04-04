@@ -21,8 +21,8 @@
     pre,
     code,
     .expressive-code *,
-    .step-item,
-    .step-line
+    .steps-container *,
+    .file-tree-container *
   ) {
   @apply mb-4;
 }
