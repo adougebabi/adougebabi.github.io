@@ -1,0 +1,23 @@
+---
+interface Props {
+  start?: number; // 起始號碼
+  class?: string;
+}
+
+const { start = 1, class: className } = Astro.props;
+const counterStartValue = start - 1;
+---
+
+<div
+  class:list={["steps-container flex flex-col", className]}
+  style={`--start-index: ${counterStartValue};`}
+>
+  <slot />
+</div>
+
+<style>
+  .steps-container {
+    /* 使用 CSS 變數動態設定起始值 */
+    counter-reset: step-counter var(--start-index);
+  }
+</style>
