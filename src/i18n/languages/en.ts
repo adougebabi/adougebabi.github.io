@@ -2,14 +2,14 @@ import Key from "../i18nKey";
 import type { Translation } from "../translation";
 
 export const en: Translation = {
-  // 首頁
+  // Homepage
   [Key.home_recent_posts]: "Recent Posts",
 
-  // 文章列表頁面
+  // Post list page
   [Key.posts_timeline_year_post_count_single]: "post",
   [Key.posts_timeline_year_post_count_plural]: "posts",
 
-  // 單篇文章
+  // Single Post page
   [Key.post_released]: "Released on",
   [Key.post_last_edited]: "Last edited on",
   [Key.post_author]: "Author",
@@ -19,7 +19,7 @@ export const en: Translation = {
   [Key.post_alt_cover_image]: "Cover image",
   [Key.post_alt_default_cover_image]: "Default cover image",
 
-  // 404頁面
+  // 404 page
   [Key.notfound_title]: "The page you visited does not exist",
   [Key.notfound_description]:
     "I can't find the page you are looking for, please check if the URL is correct.",
@@ -41,4 +41,9 @@ export const en: Translation = {
     "For more information about this issue and possible fixes, visit https://reurl.cc/jmEY8Z.",
   [Key.notfound_please_go_back_homo]:
     "For detailed information on this issue and possible fixes, please review Silver Dream again. (surely",
+
+  // Notice of Blog content is not found
+  [Key.empty_blog_title]: "Where is the post?",
+  [Key.empty_blog_description]:
+    "Seems there is no post that is available to use, maybe you can create one... or copy some?",
 };

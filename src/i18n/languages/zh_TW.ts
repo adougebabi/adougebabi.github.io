@@ -2,11 +2,14 @@ import Key from "../i18nKey";
 import type { Translation } from "../translation";
 
 export const zh_TW: Translation = {
+  // 首頁
   [Key.home_recent_posts]: "最近更新",
 
+  // 文章列表頁面
   [Key.posts_timeline_year_post_count_single]: "篇文章",
   [Key.posts_timeline_year_post_count_plural]: "篇文章",
 
+  // 單篇文章
   [Key.post_released]: "文章發布時間",
   [Key.post_last_edited]: "更新時間",
   [Key.post_author]: "作者",
@@ -16,6 +19,7 @@ export const zh_TW: Translation = {
   [Key.post_alt_cover_image]: "封面圖片",
   [Key.post_alt_default_cover_image]: "預設封面圖片",
 
+  // 404頁面
   [Key.notfound_title]: "要找的東西不在這！",
   [Key.notfound_description]: "找不到目標的頁面，請查明後再開...",
   [Key.notfound_bsod_title_line_1]: "您的裝置發生問題，但我們不可能重新啟動。",
@@ -34,4 +38,9 @@ export const zh_TW: Translation = {
     "如需此問題與可能修正的詳細資訊，請前往 https://reurl.cc/jmEY8Z 觀看驚喜影片。",
   [Key.notfound_please_go_back_homo]:
     "如需此問題與可能修正的詳細資訊，請先重新看一遍銀夢（確信",
+
+  // 文章集合為空通知
+  [Key.empty_blog_title]: "文章在哪裡？",
+  [Key.empty_blog_description]:
+    "似乎沒有可用的文章，也許你可以建立一個... 或者複製一些過來？",
 };
