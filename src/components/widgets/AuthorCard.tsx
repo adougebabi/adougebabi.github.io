@@ -93,7 +93,7 @@ function AuthorCard({
       {/* 卡片內容 */}
       <div className="relative z-10 flex justify-start gap-4">
         <Avatar className="h-12 w-12">
-          <AvatarImage src={image} />
+          <AvatarImage src={image} alt={name} />
           <AvatarFallback>{name.charAt(0)}</AvatarFallback>
         </Avatar>
         <div className="w-full space-y-1">
