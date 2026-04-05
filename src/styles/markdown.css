@@ -24,7 +24,7 @@
     .steps-container *,
     .file-tree-container *,
     .sh-builtin-components *,
-
+    .sh-builtin-components
   ) {
   @apply mb-4;
 }
