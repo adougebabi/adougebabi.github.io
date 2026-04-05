@@ -20,7 +20,8 @@ const folderId = `folder-${Math.random().toString(36).substr(2, 9)}`;
 <div
   class={cn(
     "sh-builtin-components folder-root select-none",
-    highlighted && "bg-green-500/10 rounded border border-green-400/20",
+    highlighted &&
+      "bg-green-500/10 rounded border border-green-400/20 my-1 is-highlighted",
   )}
 >
   <button

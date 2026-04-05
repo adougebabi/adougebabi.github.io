@@ -96,3 +96,11 @@ const { class: className, path } = Astro.props;
     });
   })();
 </script>
+
+<style>
+  /* 這裡的樣式主要是為了確保資料夾內容的動畫效果 */
+  .is-highlighted > [aria-expanded="true"] {
+    /* 如果資料夾本身被高亮，則在展開時保持高亮狀態 */
+    padding-bottom: calc(var(--spacing) * 2);
+  }
+</style>
