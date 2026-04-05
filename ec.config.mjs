@@ -14,4 +14,5 @@ export default defineEcConfig({
   },
   plugins: [pluginLineNumbers()],
   textMarkers: true,
+  themes: ["kanagawa-dragon"],
 });
