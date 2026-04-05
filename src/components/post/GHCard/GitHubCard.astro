@@ -106,11 +106,11 @@ const langColor = data?.language
   ) : (
     <div
       class={cn(
-        "sh-builtin-components flex min-h-35 flex-col items-center justify-center gap-2 rounded-lg border border-white/10 bg-neutral-900 px-5 py-5 text-center text-gray-500",
+        "sh-builtin-components flex min-h-35 flex-col items-center justify-center gap-2 rounded-lg border border-red-50/10 bg-red-950 px-5 py-5 text-center text-red-500 transition-all duration-300 hover:border-red-50/30 hover:bg-red-900/90",
         className,
       )}
     >
-      <div class="sh-builtin-components flex size-8 items-center justify-center rounded-lg border bg-neutral-800">
+      <div class="sh-builtin-components flex size-8 items-center justify-center rounded-lg border border-red-500/80 bg-red-800/50">
         <SearchAlert size={20} />
       </div>
       {i18n(I18nKey.github_card_not_found)}
