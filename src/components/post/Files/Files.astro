@@ -39,62 +39,81 @@ const { class: className, path } = Astro.props;
 </div>
 
 <script is:inline>
-  // 使用函數封裝，避免變數污染
-  (function setupFileTrees() {
+  function initFileTrees() {
     // 找出所有尚未初始化的 FileTree 容器
     const containers = document.querySelectorAll(
-      ".file-tree-container:not([data-initialized])",
+      ".file-tree-container:not([data-initialized-enhanced])",
     );
 
     containers.forEach((container) => {
-      // 標記為已初始化，防止重複執行
-      container.setAttribute("data-initialized", "true");
+      // 標記為已初始化
+      container.setAttribute("data-initialized-enhanced", "true");
 
-      // 僅針對此容器內的觸發器進行監聽
-      container.addEventListener("click", (e) => {
-        const trigger = e.target.closest(".folder-trigger");
-        if (!trigger) return;
+      const controller = new AbortController();
+      const { signal } = controller;
 
-        // 阻止冒泡，確保嵌套資料夾（如您提到的 core）不會誤觸父層
-        e.stopPropagation();
+      // 使用事件代理，將點擊事件掛在容器上
+      container.addEventListener(
+        "click",
+        (e) => {
+          const trigger = e.target.closest(".folder-trigger");
+          if (!trigger) return;
 
-        const targetId = trigger.getAttribute("data-target");
-        const target = document.getElementById(targetId);
-        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+          // 阻止冒泡，確保嵌套資料夾不會誤觸父層
+          e.stopPropagation();
 
-        const chevron = trigger.querySelector(".lucide-chevron-right");
-        const iconClose = trigger.querySelector(".folder-icon-close");
-        const iconOpen = trigger.querySelector(".folder-icon-open");
+          const targetId = trigger.getAttribute("data-target");
+          const target = document.getElementById(targetId);
+          if (!target) return;
 
-        if (!isExpanded) {
-          // 展開邏輯
-          target.removeAttribute("hidden");
-          void target.offsetHeight; // 強制 Reflow 以啟動動畫
-          target.style.maxHeight = "1000px";
+          const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+          const chevron = trigger.querySelector(".lucide-chevron-right");
+          const iconClose = trigger.querySelector(".folder-icon-close");
+          const iconOpen = trigger.querySelector(".folder-icon-open");
 
-          trigger.setAttribute("aria-expanded", "true");
-          if (chevron) chevron.style.transform = "rotate(90deg)";
-          if (iconClose) iconClose.style.opacity = "0";
-          if (iconOpen) iconOpen.style.opacity = "1";
-        } else {
-          // 收合邏輯
-          target.style.maxHeight = "0px";
-          trigger.setAttribute("aria-expanded", "false");
+          if (!isExpanded) {
+            // 展開邏輯
+            target.removeAttribute("hidden");
+            void target.offsetHeight; // 強制 Reflow
+            target.style.maxHeight = "1000px";
 
-          if (chevron) chevron.style.transform = "rotate(0deg)";
-          if (iconClose) iconClose.style.opacity = "1";
-          if (iconOpen) iconOpen.style.opacity = "0";
+            trigger.setAttribute("aria-expanded", "true");
+            if (chevron) chevron.style.transform = "rotate(90deg)";
+            if (iconClose) iconClose.style.opacity = "0";
+            if (iconOpen) iconOpen.style.opacity = "1";
+          } else {
+            // 收合邏輯
+            target.style.maxHeight = "0px";
+            trigger.setAttribute("aria-expanded", "false");
 
-          // 等待動畫結束後隱藏
-          setTimeout(() => {
-            if (trigger.getAttribute("aria-expanded") === "false") {
-              target.setAttribute("hidden", "");
-            }
-          }, 300);
-        }
-      });
+            if (chevron) chevron.style.transform = "rotate(0deg)";
+            if (iconClose) iconClose.style.opacity = "1";
+            if (iconOpen) iconOpen.style.opacity = "0";
+
+            // 等待動畫結束後隱藏
+            setTimeout(() => {
+              if (trigger.getAttribute("aria-expanded") === "false") {
+                target.setAttribute("hidden", "");
+              }
+            }, 300);
+          }
+        },
+        { signal },
+      );
+
+      // 在頁面切換前清理監聽器
+      document.addEventListener(
+        "astro:before-swap",
+        () => {
+          controller.abort();
+        },
+        { once: true },
+      );
     });
-  })();
+  }
+
+  // 監聽 astro:page-load 以支援 ClientRouter
+  document.addEventListener("astro:page-load", initFileTrees);
 </script>
 
 <style>

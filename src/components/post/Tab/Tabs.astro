@@ -115,12 +115,14 @@ if (hasError) {
 </style>
 
 <script is:inline>
-  (function setupEnhancedTabs() {
+  // 1. 將初始化邏輯封裝成一個函數
+  function initTabs() {
     const containers = document.querySelectorAll(
       ".tabs-container:not([data-initialized-enhanced])",
     );
 
     containers.forEach((container) => {
+      // 標記已初始化，避免重複執行
       container.setAttribute("data-initialized-enhanced", "true");
 
       const wrapper = container.querySelector(".tabs-nav-wrapper");
@@ -128,7 +130,7 @@ if (hasError) {
       const panels = container.querySelectorAll(".tab-panel");
       const line = container.querySelector(".tab-sliding-line");
 
-      // 使用 AbortController 管理事件監聽器
+      // 使用 AbortController 管理當前頁面的事件監聽器
       const controller = new AbortController();
       const { signal } = controller;
 
@@ -142,6 +144,7 @@ if (hasError) {
 
       // --- 漸層遮罩邏輯 ---
       const updateGradients = () => {
+        if (!nav) return;
         const scrollLeft = nav.scrollLeft;
         const maxScroll = nav.scrollWidth - nav.clientWidth;
 
@@ -166,7 +169,6 @@ if (hasError) {
         const btn = document.createElement("button");
         btn.type = "button";
         btn.innerText = label;
-
         btn.className = `tab-button flex-shrink-0 relative z-10 px-4 py-2 text-sm font-medium transition-colors duration-300 outline-none`;
 
         if (idx === defaultIndex) {
@@ -182,6 +184,7 @@ if (hasError) {
       });
 
       const updateLine = (btn, behavior = "smooth") => {
+        if (!line || !btn) return;
         line.style.opacity = "1";
         line.style.width = `${btn.offsetWidth}px`;
         line.style.transform = `translateX(${btn.offsetLeft}px)`;
@@ -219,7 +222,7 @@ if (hasError) {
         updateGradients();
       });
 
-      // Resize 監聽器也使用 signal
+      // Resize 監聽器
       window.addEventListener(
         "resize",
         () => {
@@ -232,7 +235,8 @@ if (hasError) {
         { signal },
       );
 
-      // 在頁面離開前清理監聽器
+      // 重要：監聽 astro:before-swap 或 astro:after-preparation 來清理監聽器
+      // 確保在 Astro 進行頁面切換前，中止所有當前的監聽器以釋放記憶體
       document.addEventListener(
         "astro:before-swap",
         () => {
@@ -241,5 +245,9 @@ if (hasError) {
         { once: true },
       );
     });
-  })();
+  }
+
+  // 2. 監聽 astro:page-load
+  // 第一次進入頁面與後續透過 ClientRouter 切換頁面後都會觸發此事件
+  document.addEventListener("astro:page-load", initTabs);
 </script>
