@@ -13,10 +13,10 @@ const { label, class: className, defaultOpen = false } = Astro.props;
 <div
   class={cn(
     "sh-builtin-components tab-panel animate-in fade-in duration-300",
-    !defaultOpen && "hidden", // 根據 defaultOpen 決定初始隱藏與否
     className,
   )}
   data-label={label}
+  data-default-open={defaultOpen ? "true" : "false"}
 >
   <slot />
 </div>

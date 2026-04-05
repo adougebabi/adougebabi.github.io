@@ -98,12 +98,19 @@ const { class: className } = Astro.props;
       const panels = container.querySelectorAll(".tab-panel");
       const line = container.querySelector(".tab-sliding-line");
 
+      // 1. 決定預設索引：尋找 data-default-open="true" 的面板
+      let defaultIndex = 0;
+      panels.forEach((panel, idx) => {
+        if (panel.getAttribute("data-default-open") === "true") {
+          defaultIndex = idx;
+        }
+      });
+
       // --- 漸層遮罩邏輯 ---
       const updateGradients = () => {
         const scrollLeft = nav.scrollLeft;
         const maxScroll = nav.scrollWidth - nav.clientWidth;
 
-        // 容許 1px 的誤差
         if (scrollLeft > 1) {
           wrapper.classList.add("show-left");
         } else {
@@ -119,30 +126,36 @@ const { class: className } = Astro.props;
 
       nav.addEventListener("scroll", updateGradients);
 
-      // --- 初始化與生成 ---
+      // --- 生成按鈕與初始化面板 ---
       panels.forEach((panel, idx) => {
         const label = panel.getAttribute("data-label");
         const btn = document.createElement("button");
         btn.type = "button";
         btn.innerText = label;
-        btn.className = `tab-button flex-shrink-0 relative z-10 px-4 py-2 text-sm font-medium transition-colors duration-300 outline-none ${
-          idx === 0 ? "text-green-400" : "text-gray-400 hover:text-gray-200"
-        }`;
+
+        // 基礎樣式 (z-10 確保在滑動線上方，flex-shrink-0 防止被擠壓)
+        btn.className = `tab-button flex-shrink-0 relative z-10 px-4 py-2 text-sm font-medium transition-colors duration-300 outline-none`;
+
+        // 根據是否為預設索引設定初始顏色
+        if (idx === defaultIndex) {
+          btn.classList.add("text-green-400");
+          panel.classList.remove("hidden");
+        } else {
+          btn.classList.add("text-gray-400", "hover:text-gray-200");
+          panel.classList.add("hidden");
+        }
 
         btn.addEventListener("click", () => switchTab(btn, idx));
         nav.insertBefore(btn, line);
-
-        if (idx === 0) panel.classList.remove("hidden");
-        else panel.classList.add("hidden");
       });
 
-      const updateLine = (btn) => {
+      const updateLine = (btn, behavior = "smooth") => {
         line.style.opacity = "1";
         line.style.width = `${btn.offsetWidth}px`;
         line.style.transform = `translateX(${btn.offsetLeft}px)`;
 
         btn.scrollIntoView({
-          behavior: "smooth",
+          behavior: behavior,
           block: "nearest",
           inline: "center",
         });
@@ -164,16 +177,20 @@ const { class: className } = Astro.props;
         });
       }
 
-      // 初次渲染後計算
+      // 初次渲染後計算位置
       requestAnimationFrame(() => {
-        const firstBtn = container.querySelector(".tab-button");
-        if (firstBtn) updateLine(firstBtn);
-        updateGradients(); // 初始判斷是否需要右側漸層
+        const allBtns = container.querySelectorAll(".tab-button");
+        const targetBtn = allBtns[defaultIndex];
+        if (targetBtn) {
+          // 初始化時使用 auto 滾動避免頁面載入時產生不必要的動畫感
+          updateLine(targetBtn, "auto");
+        }
+        updateGradients();
       });
 
       window.addEventListener("resize", () => {
         const activeBtn = container.querySelector(".tab-button.text-green-400");
-        if (activeBtn) updateLine(activeBtn);
+        if (activeBtn) updateLine(activeBtn, "auto");
         updateGradients();
       });
     });
