@@ -14,10 +14,11 @@ const { class: className } = Astro.props;
     className,
   )}
 >
-  <div class="relative border-b border-white/10 bg-neutral-900/50">
+  <div
+    class="tabs-nav-wrapper relative border-b border-white/10 bg-neutral-900/50"
+  >
     <div
-      class="tab-nav scrollbar-hide relative flex overflow-x-auto overflow-y-hidden px-2 whitespace-nowrap"
-      style="mask-image: linear-gradient(to right, black 90%, transparent 100%);"
+      class="tab-nav scrollbar-custom relative flex overflow-x-auto overflow-y-hidden px-2 whitespace-nowrap transition-all"
     >
       <div
         class="tab-sliding-line pointer-events-none absolute bottom-0 left-0 h-[2px] bg-green-500 opacity-0 transition-all duration-300 ease-out"
@@ -33,35 +34,97 @@ const { class: className } = Astro.props;
 </div>
 
 <style>
-  /* 隱藏捲軸但保留捲動功能 */
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  /* 1. 自定義捲軸樣式（取代原本的隱藏邏輯） */
+  .scrollbar-custom::-webkit-scrollbar {
+    height: 4px; /* 較細的捲軸 */
   }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* 2. 動態漸層邏輯 [核心修改] */
+  .tabs-nav-wrapper::before,
+  .tabs-nav-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    z-index: 20;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  /* 左側漸層 */
+  .tabs-nav-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #0f0f0f 0%, transparent 100%);
+  }
+
+  /* 右側漸層 */
+  .tabs-nav-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #0f0f0f 0%, transparent 100%);
+  }
+
+  /* 根據狀態顯示漸層 */
+  .show-left::before {
+    opacity: 1;
+  }
+  .show-right::after {
+    opacity: 1;
   }
 </style>
 
 <script is:inline>
-  (function setupDynamicTabs() {
+  (function setupEnhancedTabs() {
     const containers = document.querySelectorAll(
-      ".tabs-container:not([data-initialized-dynamic])",
+      ".tabs-container:not([data-initialized-enhanced])",
     );
 
     containers.forEach((container) => {
-      container.setAttribute("data-initialized-dynamic", "true");
+      container.setAttribute("data-initialized-enhanced", "true");
 
+      const wrapper = container.querySelector(".tabs-nav-wrapper");
       const nav = container.querySelector(".tab-nav");
       const panels = container.querySelectorAll(".tab-panel");
       const line = container.querySelector(".tab-sliding-line");
 
+      // --- 漸層遮罩邏輯 ---
+      const updateGradients = () => {
+        const scrollLeft = nav.scrollLeft;
+        const maxScroll = nav.scrollWidth - nav.clientWidth;
+
+        // 容許 1px 的誤差
+        if (scrollLeft > 1) {
+          wrapper.classList.add("show-left");
+        } else {
+          wrapper.classList.remove("show-left");
+        }
+
+        if (scrollLeft < maxScroll - 1) {
+          wrapper.classList.add("show-right");
+        } else {
+          wrapper.classList.remove("show-right");
+        }
+      };
+
+      nav.addEventListener("scroll", updateGradients);
+
+      // --- 初始化與生成 ---
       panels.forEach((panel, idx) => {
         const label = panel.getAttribute("data-label");
         const btn = document.createElement("button");
         btn.type = "button";
         btn.innerText = label;
-        // 確保按鈕不會被壓縮 (flex-shrink-0) [cite: 37]
         btn.className = `tab-button flex-shrink-0 relative z-10 px-4 py-2 text-sm font-medium transition-colors duration-300 outline-none ${
           idx === 0 ? "text-green-400" : "text-gray-400 hover:text-gray-200"
         }`;
@@ -78,7 +141,6 @@ const { class: className } = Astro.props;
         line.style.width = `${btn.offsetWidth}px`;
         line.style.transform = `translateX(${btn.offsetLeft}px)`;
 
-        // [新增] 自動捲動讓選中的標籤進入視線
         btn.scrollIntoView({
           behavior: "smooth",
           block: "nearest",
@@ -102,14 +164,17 @@ const { class: className } = Astro.props;
         });
       }
 
-      const firstBtn = container.querySelector(".tab-button");
-      if (firstBtn) {
-        requestAnimationFrame(() => updateLine(firstBtn));
-      }
+      // 初次渲染後計算
+      requestAnimationFrame(() => {
+        const firstBtn = container.querySelector(".tab-button");
+        if (firstBtn) updateLine(firstBtn);
+        updateGradients(); // 初始判斷是否需要右側漸層
+      });
 
       window.addEventListener("resize", () => {
         const activeBtn = container.querySelector(".tab-button.text-green-400");
         if (activeBtn) updateLine(activeBtn);
+        updateGradients();
       });
     });
   })();
