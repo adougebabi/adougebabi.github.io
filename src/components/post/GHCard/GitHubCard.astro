@@ -1,4 +1,5 @@
 ---
+// src/components/GitHubCard.astro
 import { cn } from "@lib/utils";
 import { Star, GitFork, SearchAlert, Circle } from "@lucide/astro";
 import { Github } from "simple-icons-astro";
@@ -6,44 +7,29 @@ import { Github } from "simple-icons-astro";
 import I18nKey from "@i18n/i18nKey";
 import i18n from "@i18n/translation";
 
+// 匯入剛建立的快取邏輯
+import { fetchRepoData } from "@lib/githubCache";
+import { programLanguagesToColorChart as langColors } from "./colors";
+import GitHubStatusBadge from "./GitHubStatusBadge.astro";
+
 interface Props {
-  repo: `${string}/${string}` | `https://github.com/${string}/${string}`; // 格式為 "user/repo"
+  repo: `${string}/${string}` | `https://github.com/${string}/${string}`;
   class?: string;
 }
 
 const { repo, class: className } = Astro.props;
 
-// 在建構階段抓取資料
+// 從環境變數取得 Token
 const token = import.meta.env.GITHUB_TOKEN;
-const normalizedRepo = repo.replace(/^https:\/\/github\.com\//, ""); // 移除 URL 前綴，確保格式為 "user/normalizedRepo"
 
 if (!token) {
   throw new Error("GitHub token is required for GitHubCard component.");
 }
 
-const response = await fetch(`https://api.github.com/repos/${normalizedRepo}`, {
-  headers: {
-    Authorization: `Bearer ${token}`,
-    "User-Agent": "Astro-Build",
-  },
-});
+// 使用快取版本抓取資料
+const data = await fetchRepoData(repo);
 
-const responseData = await response.json();
-
-let data;
-
-if (responseData?.message === "Not Found") {
-  data = null;
-} else if (!response.ok) {
-  throw new Error(`GitHub API error: ${response.status} for ${normalizedRepo}`);
-} else {
-  data = responseData;
-}
-
-// 語言顏色映射（可根據需求擴充）
-import { programLanguagesToColorChart as langColors } from "./colors";
-import GitHubStatusBadge from "./GitHubStatusBadge.astro";
-
+// 計算語言顏色
 const langColor = data?.language
   ? (langColors[data.language]?.color ?? "#9198a1")
   : "#9198a1";
