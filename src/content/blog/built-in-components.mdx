@@ -133,14 +133,22 @@ import GithubCard from "@shComponents/GHCard/GitHubCard.astro";
 
 ## GitHub 卡片
 
+- **位置：**`src/components/GHCard/GitHubCard.astro`
+- **引入路徑：**`@shComponents/GHCard/GitHubCard.astro`
+- **參數：**
+  | 參數名稱 | 類型 | 說明 |
+  | --- | --- | --- |
+  | `repo` | string | 指定要顯示的 GitHub 倉庫，格式為 `username/repository` 或 `https://github.com/username/repository`。 |
+  | `class` | string | 額外的 CSS Class，可以用來自定義 GitHub 卡片的樣式。 |
+
 以下是一個 GitHub 卡片的範例，展示了如何使用 `GithubCard` 組件來顯示 GitHub 倉庫的資訊：
 
 <GithubCard repo="510208/sh-blog-next" />
 
 以下是一個已被封存的儲存庫：
 
-<GithubCard repo="510208/MD5Hashing-NEW" />
+<GithubCard repo="https://github.com/510208/MD5Hashing-NEW" />
 
 以下是一個不存在的儲存庫：
 
-<GithubCard repo="510208/ThisRepoDoesNotExist" />
+<GithubCard repo="https://github.com/510208/ThisRepoDoesNotExist" />
