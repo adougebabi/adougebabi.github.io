@@ -23,16 +23,15 @@ export default function EmptyBlog({}) {
           <RotateCcw />
           {i18n(I18nKey.empty_blog_refresh)}
         </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          className="cursor-pointer"
-          onClick={() =>
-            window.open("https://github.com/510208/sh-blog-next", "_blank")
-          }
-        >
-          <FileText />
-          {i18n(I18nKey.empty_blog_docs)}
+        <Button variant="outline" size="sm" className="cursor-pointer" asChild>
+          <a
+            href="https://github.com/510208/sh-blog-next"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FileText />
+            {i18n(I18nKey.empty_blog_docs)}
+          </a>
         </Button>
       </div>
     </div>
