@@ -27,6 +27,7 @@ export default function Tags({ tags }: TagsProps) {
           <TooltipTrigger asChild>
             <button
               aria-haspopup="true"
+              aria-label="View more tag"
               className="tag-more inline-flex items-center rounded bg-neutral-800 px-2 py-1 text-sm transition hover:bg-neutral-700"
               tabIndex={0}
             >
