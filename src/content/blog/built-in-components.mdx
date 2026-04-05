@@ -84,6 +84,26 @@ import GithubCard from "@shComponents/GHCard/GitHubCard.astro";
   | `<File />` | `icon` | FileIconType | 指定檔案圖示的類型（預設為`normal`，所有選項請參考下方資訊）。 |
   | `<File />` | `highlighted` | boolean | 指定檔案是否高亮顯示（可選，預設為`False`。請注意，高亮檔案並不會因而將父資料夾一同高亮。如需高亮資料夾，請在 `<Folder />` 上使用 `highlighted` 屬性）。 |
 
+```astro
+<Files path="/sh-blog-next/">
+  <Folder name="app" defaultOpen>
+    <File name="layout.tsx" icon="code" />
+    <File name="page.tsx" />
+    <File name="global.css" highlighted />
+  </Folder>
+  <Folder name="components" highlighted>
+    <File name="button.tsx" icon="code" />
+    <File name="tabs.tsx" />
+    <File name="dialog.tsx" highlighted />
+    <Folder name="core">
+      <File name="Header.astro" />
+      <File name="Footer.astro" />
+    </Folder>
+  </Folder>
+  <File name="package.json" />
+</Files>
+```
+
 <Files path="/sh-blog-next/">
   <Folder name="app" defaultOpen>
     <File name="layout.tsx" icon="code" />
@@ -103,6 +123,35 @@ import GithubCard from "@shComponents/GHCard/GitHubCard.astro";
 </Files>
 
 以下是所有可用的圖示：
+
+```astro
+<Files>
+  <Folder name="Development" defaultOpen>
+    <File name="source_code.ts" icon="code" />
+    <File name="config.yaml" icon="config" />
+    <File name="script.sh" icon="terminal" />
+    <File name="compiled.bin" icon="binary" />
+  </Folder>
+  <Folder name="Media Assets" defaultOpen>
+    <File name="background.png" icon="image" />
+    <File name="podcast.mp3" icon="audio" />
+    <File name="tutorial.mp4" icon="video" />
+    <File name="model_3d.obj" icon="3d" />
+  </Folder>
+  <Folder name="Documents">
+    <File name="report.pdf" icon="document" />
+    <File name="data_sheet.xlsx" icon="sheet" />
+    <File name="ssl_cert.crt" icon="certificate" />
+    <File name="private.key" icon="key" />
+  </Folder>
+  <Folder name="System & Others" defaultOpen>
+    <File name="backup.zip" icon="archive" />
+    <File name="scanner_output.pdf" icon="scan" />
+    <File name="unknown_file" icon="not-found" />
+    <File name="regular_note.txt" icon="normal" />
+  </Folder>
+</Files>
+```
 
 <Files>
   <Folder name="Development" defaultOpen>
@@ -147,12 +196,70 @@ import GithubCard from "@shComponents/GHCard/GitHubCard.astro";
 
 以下是一個 GitHub 卡片的範例，展示了如何使用 `GithubCard` 組件來顯示 GitHub 倉庫的資訊：
 
+```astro
+<GithubCard repo="510208/sh-blog-next" />
+```
+
 <GithubCard repo="510208/sh-blog-next" />
 
 以下是一個已被封存的儲存庫：
+
+```astro
+<GithubCard repo="https://github.com/510208/MD5Hashing-NEW" />
+```
 
 <GithubCard repo="https://github.com/510208/MD5Hashing-NEW" />
 
 以下是一個不存在的儲存庫：
 
+```astro
 <GithubCard repo="https://github.com/510208/ThisRepoDoesNotExist" />
+```
+
+<GithubCard repo="https://github.com/510208/ThisRepoDoesNotExist" />
+
+## 提示區塊
+
+> 提示區塊已經被集成進 Markdown 解析器中，你可以直接使用 Markdown 的語法來創建提示區塊。
+
+```markdown
+:::note[筆記]
+Highlights information that users should take into account, even when skimming.
+:::
+
+:::tip[提示]
+Optional information to help a user be more successful.
+:::
+
+:::important[重要]
+Important information for a user to know.
+:::
+
+:::danger[危險]
+Serious and/or dangerous situations.
+:::
+
+:::caution[小心]
+Negative potential consequences of an action.
+:::
+```
+
+:::note[筆記]
+Highlights information that users should take into account, even when skimming.
+:::
+
+:::tip[提示]
+Optional information to help a user be more successful.
+:::
+
+:::important[重要]
+Important information for a user to know.
+:::
+
+:::danger[危險]
+Serious and/or dangerous situations.
+:::
+
+:::caution[小心]
+Negative potential consequences of an action.
+:::
