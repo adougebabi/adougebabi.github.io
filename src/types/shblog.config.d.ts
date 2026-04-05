@@ -104,7 +104,12 @@ interface Style {
   defaultPostImage: string;
   postsPerPage: number;
   titleSeparator: string;
+
+  /**
+   * @deprecated This property is deprecated and will be removed in future versions. Now this is always enabled to provide a smoother user experience. Please remove this property from your configuration.
+   */
   enableTransitions: boolean;
+
   enableRecentPosts: boolean;
 }
 

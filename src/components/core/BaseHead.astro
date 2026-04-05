@@ -65,7 +65,7 @@ const FAVICON = config.favicon || "/favicon.svg";
   content={new URL(typeof image === "string" ? image : image.src, Astro.url)}
 />
 
-{config.style.enableTransitions && <ClientRouter />}
+<ClientRouter />
 
 <!-- Google Tag Manager -->
 <script

@@ -68,7 +68,10 @@ const defaultConfig: ShBlogConfig = {
       "/assets/layouts/homepage/samhacker_homepage_background.webp",
     postsPerPage: 10,
     titleSeparator: "|",
-    enableTransitions: true,
+
+    /** @deprecated This option is no longer used and will be removed in future versions. Theming and transitions are always enabled by default to provide a consistent user experience. Please remove this option from your configuration. */
+    enableTransitions: true, // 已標記為過時
+
     enableRecentPosts: true,
   },
 
