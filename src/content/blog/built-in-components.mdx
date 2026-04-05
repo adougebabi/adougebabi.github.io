@@ -221,6 +221,40 @@ import TabItem from "@shComponents/Tab/TabItem.astro";
 
 <GithubCard repo="https://github.com/510208/ThisRepoDoesNotExist" />
 
+## 分頁
+
+<Tabs labels={["Javascript", "Rust", "Typescript"]}>
+  <TabItem index={0}>
+
+    ```javascript
+    console.log("Hello World in Javascript");
+    ```
+
+  </TabItem>
+  <TabItem index={1}>
+    <p class="text-gray-300">Hello World in Rust</p>
+  </TabItem>
+  <TabItem index={2}>
+    <p class="text-gray-300">Hello World in Typescript</p>
+  </TabItem>
+</Tabs>
+
+<Tabs labels={["Javascript", "Rust", "Typescript"]}>
+  <TabItem index={0}>
+
+    ```javascript
+    console.log("Hello World in Javascript");
+    ```
+
+  </TabItem>
+  <TabItem index={1}>
+    <p class="text-gray-300">Hello World in Rust</p>
+  </TabItem>
+  <TabItem index={2}>
+    <p class="text-gray-300">Hello World in Typescript</p>
+  </TabItem>
+</Tabs>
+
 ## 提示區塊
 
 > 提示區塊已經被集成進 Markdown 解析器中，你可以直接使用 Markdown 的語法來創建提示區塊。
@@ -266,21 +300,3 @@ Serious and/or dangerous situations.
 :::caution[小心]
 Negative potential consequences of an action.
 :::
-
-## 分頁
-
-<Tabs labels={["Javascript", "Rust", "Typescript"]}>
-  <TabItem index={0}>
-
-    ```javascript
-    console.log("Hello World in Javascript");
-    ```
-
-  </TabItem>
-  <TabItem index={1}>
-    <p class="text-gray-300">Hello World in Rust</p>
-  </TabItem>
-  <TabItem index={2}>
-    <p class="text-gray-300">Hello World in Typescript</p>
-  </TabItem>
-</Tabs>
