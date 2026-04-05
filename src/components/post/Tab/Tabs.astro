@@ -1,37 +1,67 @@
 ---
 import { cn } from "@lib/utils";
+import { SearchAlert } from "@lucide/astro";
+
+import I18nKey from "@i18n/i18nKey";
+import i18n from "@i18n/translation";
 
 interface Props {
   class?: string;
 }
 
 const { class: className } = Astro.props;
+
+// 檢查defaultOpen的唯一性
+const html = await Astro.slots.render("default");
+
+// 使用正規表達式檢查標記中出現 data-default-open="true" 的次數
+const defaultOpenCount = (html.match(/data-default-open="true"/g) || []).length;
+const hasError = defaultOpenCount > 1;
+
+if (hasError) {
+  console.error(
+    i18n(I18nKey.tabs_warning_multiple_default_open, {
+      count: defaultOpenCount,
+    }),
+  );
+}
 ---
 
-<div
-  class={cn(
-    "sh-builtin-components tabs-container my-6 rounded-lg overflow-hidden border border-white/10 bg-neutral-900",
-    className,
-  )}
->
-  <div
-    class="tabs-nav-wrapper relative border-b border-white/10 bg-neutral-900/50"
-  >
+{
+  hasError ? (
     <div
-      class="tab-nav scrollbar-custom relative flex overflow-x-auto overflow-y-hidden px-2 whitespace-nowrap transition-all"
+      class={cn(
+        "sh-builtin-components flex min-h-35 flex-col items-center justify-center gap-2 rounded-lg border border-red-50/10 bg-red-950 px-5 py-5 text-center text-red-500 transition-all duration-300 hover:border-red-50/30 hover:bg-red-900/90",
+        className,
+      )}
     >
-      <div
-        class="tab-sliding-line pointer-events-none absolute bottom-0 left-0 h-[2px] bg-green-500 opacity-0 transition-all duration-300 ease-out"
-        style="width: 0; transform: translateX(0);"
-      >
+      <div class="sh-builtin-components flex size-8 items-center justify-center rounded-lg border border-red-500/80 bg-red-800/50">
+        <SearchAlert size={20} />
+      </div>
+      {i18n(I18nKey.tabs_multiple_default_open_description)}
+    </div>
+  ) : (
+    <div
+      class={cn(
+        "sh-builtin-components tabs-container my-6 overflow-hidden rounded-lg border border-white/10 bg-neutral-900",
+        className,
+      )}
+    >
+      <div class="tabs-nav-wrapper relative border-b border-white/10 bg-neutral-900/50">
+        <div class="tab-nav scrollbar-custom relative flex overflow-x-auto overflow-y-hidden px-2 whitespace-nowrap transition-all">
+          <div
+            class="tab-sliding-line pointer-events-none absolute bottom-0 left-0 h-[2px] bg-green-500 opacity-0 transition-all duration-300 ease-out"
+            style="width: 0; transform: translateX(0);"
+          />
+        </div>
+      </div>
+
+      <div class="tab-panels px-5 pt-2 pb-5">
+        <slot />
       </div>
     </div>
-  </div>
-
-  <div class="tab-panels px-5 pt-2 pb-5">
-    <slot />
-  </div>
-</div>
+  )
+}
 
 <style>
   /* 1. 自定義捲軸樣式（取代原本的隱藏邏輯） */
