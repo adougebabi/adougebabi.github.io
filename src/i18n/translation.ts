@@ -19,11 +19,14 @@ const map: { [key: string]: Translation } = {
 
 export const supportedLanguages = Object.keys(map);
 
-export function getTranslation(lang: string): Translation {
-  return map[lang.toLowerCase()] || defaultTranslation;
+export function getTranslation(lang: string, key: I18nKey): string {
+  const normalizedLang = lang.toLowerCase();
+  const current = map[normalizedLang] ?? defaultTranslation;
+
+  return current[key] ?? key;
 }
 
 export default function i18n(key: I18nKey): string {
   const lang = config.siteLang || "zh_TW";
-  return getTranslation(lang)[key];
+  return getTranslation(lang, key);
 }

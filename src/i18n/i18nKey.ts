@@ -38,6 +38,13 @@ enum I18nKey {
   empty_blog_description = "Seems there is no post that is available to use, maybe you can create one... or copy some?",
   empty_blog_refresh = "Refresh",
   empty_blog_docs = "Learn More",
+
+  // 內建組件 - GitHubCard
+  github_card_public = "Public",
+  github_card_private = "Private",
+  github_card_archive = "Archive",
+  github_card_no_description = "No description provided.",
+  github_card_updated_at = "Updated at",
 }
 
 export default I18nKey;
