@@ -1,4 +1,6 @@
 ---
+import { cn } from "@lib/utils";
+
 interface Props {
   start?: number; // 起始號碼
   class?: string;
@@ -9,7 +11,7 @@ const counterStartValue = start - 1;
 ---
 
 <div
-  class:list={["steps-container flex flex-col", className]}
+  class={cn("sh-builtin-components steps-container flex flex-col", className)}
   style={`--start-index: ${counterStartValue};`}
 >
   <slot />

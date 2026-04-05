@@ -1,4 +1,5 @@
 ---
+import { cn } from "@lib/utils";
 import { File as FileNormal } from "@lucide/astro";
 
 // filepath: FileIcon.astro
@@ -72,4 +73,4 @@ const SelectedIcon = iconMap[icon] || iconMap.normal;
 export type { FileIconType };
 ---
 
-<SelectedIcon class={iconClass} />
+<SelectedIcon class={cn(iconClass, "sh-builtin-components")} />

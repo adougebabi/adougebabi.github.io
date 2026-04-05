@@ -1,58 +1,91 @@
 ---
+import { cn } from "@lib/utils";
+import { Folder as FolderIcon } from "@lucide/astro";
+
 interface Props {
   class?: string;
+  path?: string;
 }
-const { class: className } = Astro.props;
+const { class: className, path } = Astro.props;
 ---
 
 <div
-  class:list={[
-    "file-tree-container font-mono text-sm border border-white/10 rounded-lg bg-[#0F0F0F] p-5",
+  class={cn(
+    "sh-builtin-components file-tree-container font-mono text-sm border border-white/10 rounded-lg bg-[#0F0F0F] overflow-hidden",
     className,
-  ]}
+  )}
 >
-  <slot />
+  {
+    path && (
+      <div
+        class="px-5 py-3 border-b border-white/10 text-gray-400 text-xs select-none flex gap-2"
+        title={path}
+      >
+        <FolderIcon class="w-4 h-4 text-gray-500" />
+        <p>{path}</p>
+      </div>
+    )
+  }
+  <div class={cn("px-5", path ? "pb-5 pt-2" : "py-5")}>
+    <slot />
+  </div>
 </div>
 
 <script is:inline>
-  document.querySelectorAll(".folder-trigger").forEach((button) => {
-    button.addEventListener("click", () => {
-      const targetId = button.getAttribute("data-target");
-      const target = document.getElementById(targetId);
-      const isExpanded = button.getAttribute("aria-expanded") === "true";
+  // 使用函數封裝，避免變數污染
+  (function setupFileTrees() {
+    // 找出所有尚未初始化的 FileTree 容器
+    const containers = document.querySelectorAll(
+      ".file-tree-container:not([data-initialized])",
+    );
 
-      const chevron = button.querySelector(".lucide-chevron-right");
-      const iconClose = button.querySelector(".folder-icon-close");
-      const iconOpen = button.querySelector(".folder-icon-open");
+    containers.forEach((container) => {
+      // 標記為已初始化，防止重複執行
+      container.setAttribute("data-initialized", "true");
 
-      if (!isExpanded) {
-        // --- 執行展開 ---
-        target.removeAttribute("hidden");
-        // 強制 reflow
-        void target.offsetHeight;
-        target.style.maxHeight = "1000px";
+      // 僅針對此容器內的觸發器進行監聽
+      container.addEventListener("click", (e) => {
+        const trigger = e.target.closest(".folder-trigger");
+        if (!trigger) return;
 
-        // 更新狀態
-        button.setAttribute("aria-expanded", "true");
-        if (chevron) chevron.style.transform = "rotate(90deg)";
-        if (iconClose) iconClose.style.opacity = "0";
-        if (iconOpen) iconOpen.style.opacity = "1";
-      } else {
-        // --- 執行收合 ---
-        target.style.maxHeight = "0px";
-        button.setAttribute("aria-expanded", "false");
+        // 阻止冒泡，確保嵌套資料夾（如您提到的 core）不會誤觸父層
+        e.stopPropagation();
 
-        if (chevron) chevron.style.transform = "rotate(0deg)";
-        if (iconClose) iconClose.style.opacity = "1";
-        if (iconOpen) iconOpen.style.opacity = "0";
+        const targetId = trigger.getAttribute("data-target");
+        const target = document.getElementById(targetId);
+        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
 
-        // 動態結束後隱藏元素，優化性能與無障礙
-        setTimeout(() => {
-          if (button.getAttribute("aria-expanded") === "false") {
-            target.setAttribute("hidden", "");
-          }
-        }, 300); // 對應 duration-300
-      }
+        const chevron = trigger.querySelector(".lucide-chevron-right");
+        const iconClose = trigger.querySelector(".folder-icon-close");
+        const iconOpen = trigger.querySelector(".folder-icon-open");
+
+        if (!isExpanded) {
+          // 展開邏輯
+          target.removeAttribute("hidden");
+          void target.offsetHeight; // 強制 Reflow 以啟動動畫
+          target.style.maxHeight = "1000px";
+
+          trigger.setAttribute("aria-expanded", "true");
+          if (chevron) chevron.style.transform = "rotate(90deg)";
+          if (iconClose) iconClose.style.opacity = "0";
+          if (iconOpen) iconOpen.style.opacity = "1";
+        } else {
+          // 收合邏輯
+          target.style.maxHeight = "0px";
+          trigger.setAttribute("aria-expanded", "false");
+
+          if (chevron) chevron.style.transform = "rotate(0deg)";
+          if (iconClose) iconClose.style.opacity = "1";
+          if (iconOpen) iconOpen.style.opacity = "0";
+
+          // 等待動畫結束後隱藏
+          setTimeout(() => {
+            if (trigger.getAttribute("aria-expanded") === "false") {
+              target.setAttribute("hidden", "");
+            }
+          }, 300);
+        }
+      });
     });
-  });
+  })();
 </script>
