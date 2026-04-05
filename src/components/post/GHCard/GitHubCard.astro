@@ -3,14 +3,14 @@
 import { cn } from "@lib/utils";
 import { Star, GitFork, SearchAlert, Circle } from "@lucide/astro";
 import { Github } from "simple-icons-astro";
-
 import I18nKey from "@i18n/i18nKey";
 import i18n from "@i18n/translation";
 
-// 匯入剛建立的快取邏輯
 import { fetchRepoData } from "@lib/githubCache";
-import { programLanguagesToColorChart as langColors } from "./colors";
 import GitHubStatusBadge from "./GitHubStatusBadge.astro";
+
+// 匯入第一層：常用語言白名單 (靜態匯入)
+import { commonLangColors } from "./commonColors";
 
 interface Props {
   repo: `${string}/${string}` | `https://github.com/${string}/${string}`;
@@ -18,21 +18,33 @@ interface Props {
 }
 
 const { repo, class: className } = Astro.props;
-
-// 從環境變數取得 Token
 const token = import.meta.env.GITHUB_TOKEN;
 
 if (!token) {
   throw new Error("GitHub token is required for GitHubCard component.");
 }
 
-// 使用快取版本抓取資料
 const data = await fetchRepoData(repo);
 
-// 計算語言顏色
-const langColor = data?.language
-  ? (langColors[data.language]?.color ?? "#9198a1")
-  : "#9198a1";
+// --- 語言顏色處理邏輯 ---
+let langColor = "#9198a1"; // 預設灰色
+
+if (data?.language) {
+  // 1. 先從白名單尋找
+  if (commonLangColors[data.language]) {
+    langColor = commonLangColors[data.language];
+  } else {
+    // 2. 沒命中，動態引入完整 65KB 檔案
+    // Vite 會將此 import 處理為非同步加載，不會阻塞主束
+    try {
+      const fullColorsModule = await import("./colors");
+      const fullColors = fullColorsModule.programLanguagesToColorChart;
+      langColor = fullColors[data.language]?.color ?? "#9198a1";
+    } catch (e) {
+      console.error("Failed to load full color chart", e);
+    }
+  }
+}
 ---
 
 {
