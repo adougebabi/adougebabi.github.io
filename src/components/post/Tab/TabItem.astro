@@ -2,19 +2,21 @@
 import { cn } from "@/lib/utils";
 
 interface Props {
-  index: number;
+  label: string; // 改為接收 label
   class?: string;
+  defaultOpen?: boolean; // 增加一個標記，用於初始化顯示
 }
 
-const { index, class: className } = Astro.props;
+const { label, class: className, defaultOpen = false } = Astro.props;
 ---
 
 <div
   class={cn(
     "sh-builtin-components tab-panel animate-in fade-in duration-300",
-    index !== 0 && "hidden",
+    !defaultOpen && "hidden", // 根據 defaultOpen 決定初始隱藏與否
     className,
   )}
+  data-label={label}
 >
   <slot />
 </div>
