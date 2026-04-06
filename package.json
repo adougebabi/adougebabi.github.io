@@ -44,7 +44,6 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "dompurify": "^3.3.3",
-    "glightbox": "^3.3.1",
     "hastscript": "^9.0.1",
     "jsdom": "^27.4.0",
     "katex": "^0.16.38",
