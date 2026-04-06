@@ -425,6 +425,25 @@ import { defineConfig } from "@/utils/define-config";
 //   },
 // };
 
-const config = defineConfig({}); // 使用 defineConfig 函式定義設定，並提供部分覆蓋設定
+const config = defineConfig({
+  behavior: {
+    commentConfig: {
+      enableComment: "Giscus",
+      giscusConfig: {
+        repo: "510208/utterances",
+        repoId: "R_kgDOKOthQw",
+        category: "Announcements",
+        categoryId: "DIC_kwDOKOthQ84Czwi8",
+        mapping: "og:title",
+        strict: "0",
+        reactionsEnabled: "1",
+        emitMetadata: "1",
+        inputPosition: "top",
+        theme: "transparent_dark",
+        lang: "zh-TW",
+      },
+    },
+  },
+}); // 使用 defineConfig 函式定義設定，並提供部分覆蓋設定
 
 export default config; // 匯出設定

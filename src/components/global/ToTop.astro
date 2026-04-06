@@ -2,7 +2,7 @@
 import { Button } from "@ui/button.tsx";
 import { ArrowUp } from "lucide-react";
 
-const className = Astro.props.class;
+const { class: className } = Astro.props;
 ---
 
 <Button
@@ -18,34 +18,60 @@ const className = Astro.props.class;
   <div class="ml-2 hidden h-px w-10 bg-gray-300/50 lg:block"></div>
 </Button>
 
-<!-- Client-side JavaScript: Handles interaction -->
 <script>
-  const scrollToTopBtn = document.getElementById(
-    "to-top-button",
-  ) as HTMLButtonElement;
+  function initToTop() {
+    const scrollToTopBtn = document.getElementById(
+      "to-top-button",
+    ) as HTMLButtonElement;
+    if (!scrollToTopBtn) return;
 
-  // Show/hide button based on scroll position
-  const handleScroll = () => {
-    const scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop;
-    if (scrollTop > 500) {
-      scrollToTopBtn.setAttribute("data-show", "true");
-    } else {
-      scrollToTopBtn.setAttribute("data-show", "false");
-    }
-  };
+    const controller = new AbortController();
+    const { signal } = controller;
 
-  // Native smooth scroll (simpler alternative)
-  const scrollToTopSimple = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+    // 1. 顯示/隱藏按鈕邏輯
+    const handleScroll = () => {
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      scrollToTopBtn.setAttribute(
+        "data-show",
+        scrollTop > 500 ? "true" : "false",
+      );
+    };
 
-  window.addEventListener("scroll", handleScroll);
-  scrollToTopBtn.addEventListener("click", scrollToTopSimple);
+    // 2. 回到頂端並重置 URL Hash
+    const scrollToTop = () => {
+      // 執行捲動
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
 
-  // Initialize button state on page load
-  handleScroll();
+      // 重置 URL：移除 Hash 但不重新整理頁面
+      // 使用 replaceState 可以避免在瀏覽紀錄中留下多餘的「無 hash」紀錄
+      if (window.location.hash) {
+        const url = new URL(window.location.href);
+        url.hash = "";
+        history.replaceState(null, "", url.toString());
+      }
+    };
+
+    // 監聽事件
+    window.addEventListener("scroll", handleScroll, { signal });
+    scrollToTopBtn.addEventListener("click", scrollToTop, { signal });
+
+    // 初始化狀態
+    handleScroll();
+
+    // 清理機制：配合 Astro ClientRouter
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        controller.abort();
+      },
+      { once: true },
+    );
+  }
+
+  // 監聽生命週期事件
+  document.addEventListener("astro:page-load", initToTop);
 </script>

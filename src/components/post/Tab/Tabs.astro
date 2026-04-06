@@ -185,17 +185,20 @@ if (hasError) {
         nav.insertBefore(btn, line);
       });
 
-      const updateLine = (btn, behavior = "smooth") => {
+      const updateLine = (btn, behavior = "smooth", shouldScroll = true) => {
         if (!line || !btn) return;
         line.style.opacity = "1";
         line.style.width = `${btn.offsetWidth}px`;
         line.style.transform = `translateX(${btn.offsetLeft}px)`;
 
-        btn.scrollIntoView({
-          behavior: behavior,
-          block: "nearest",
-          inline: "center",
-        });
+        // 只有在需要時才捲動標籤導覽列
+        if (shouldScroll) {
+          btn.scrollIntoView({
+            behavior: behavior,
+            block: "nearest",
+            inline: "center",
+          });
+        }
       };
 
       function switchTab(activeBtn, targetIdx) {
@@ -219,7 +222,8 @@ if (hasError) {
         const allBtns = container.querySelectorAll(".tab-button");
         const targetBtn = allBtns[defaultIndex];
         if (targetBtn) {
-          updateLine(targetBtn, "auto");
+          // 關鍵：這裡傳入 false，避免頁面載入時自動跳轉
+          updateLine(targetBtn, "auto", false);
         }
         updateGradients();
       });
@@ -231,7 +235,8 @@ if (hasError) {
           const activeBtn = container.querySelector(
             ".tab-button.text-green-400",
           );
-          if (activeBtn) updateLine(activeBtn, "auto");
+          // 關鍵：縮放時也傳入 false
+          if (activeBtn) updateLine(activeBtn, "auto", false);
           updateGradients();
         },
         { signal },
