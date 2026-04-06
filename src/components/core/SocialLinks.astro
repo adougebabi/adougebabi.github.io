@@ -8,47 +8,52 @@ const isImageUrl = (str: string): boolean => {
 
 type LinkItem = (typeof config.footer.links)[number];
 
-const resolvedLinks = await Promise.all(
-  config.footer.links.map(async (link: LinkItem) => {
-    const isUrl = isImageUrl(link.socialMedia);
+const resolvedLinks = config.footer.links.map((link: LinkItem) => {
+  const { socialMedia } = link;
 
-    if (isUrl) {
-      return { ...link, isUrl, IconComponent: null };
-    }
-
-    try {
-      const mod = await import("simple-icons-astro/" + link.socialMedia);
+  if (typeof socialMedia === "string") {
+    if (isImageUrl(socialMedia)) {
       return {
         ...link,
-        isUrl: false,
-        IconComponent: mod.default,
+        kind: "image" as const,
+        src: socialMedia,
+        IconComponent: null,
       };
-    } catch {
-      console.warn(
-        "[SocialLinks] icon not found:",
-        link.socialMedia,
-        "Please verify the name on simpleicons.org",
-      );
-      return { ...link, isUrl: false, IconComponent: null };
     }
-  }),
-);
+
+    return {
+      ...link,
+      kind: "image" as const,
+      src: socialMedia,
+      IconComponent: null,
+    };
+  }
+
+  return {
+    ...link,
+    kind: "icon" as const,
+    src: "",
+    IconComponent: socialMedia,
+  };
+});
 ---
 
 <div class="flex flex-wrap items-center justify-start gap-4 md:justify-end">
   {
-    resolvedLinks.map(({ socialMedia, url, isUrl, IconComponent }) => (
+    resolvedLinks.map(({ socialMedia, url, kind, src, IconComponent }) => (
       <Button asChild>
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={socialMedia}
+          aria-label={
+            typeof socialMedia === "string" ? socialMedia : "social link"
+          }
           class="h-6 w-6 text-white"
         >
-          {isUrl ? (
+          {kind === "image" ? (
             <img
-              src={socialMedia}
+              src={src}
               alt=""
               class="h-6 w-6 object-contain transition-all hover:opacity-80"
             />
