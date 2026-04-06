@@ -27,7 +27,9 @@
       .steps-container *,
       .file-tree-container *,
       .sh-builtin-components *,
-      .sh-builtin-components
+      .sh-builtin-components,
+      .katex,
+      .katex *
     ) {
     @apply mb-4;
   }
