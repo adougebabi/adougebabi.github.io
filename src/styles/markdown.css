@@ -196,14 +196,6 @@
       @apply relative px-0.5 text-green-300 transition-all duration-300;
     }
 
-    & a.anchor {
-      @apply relative;
-
-      & .anchor-icon {
-        @apply absolute top-4 -right-4;
-      }
-    }
-
     & a:not(.sh-builtin-components)::after {
       content: "";
       position: absolute;
