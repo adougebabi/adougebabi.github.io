@@ -95,7 +95,6 @@ export default defineConfig({
       remarkSpoiler,
     ],
     rehypePlugins: [
-      rehypeKatex,
       rehypeSlug,
       [
         rehypeAutolinkHeadings,
@@ -123,6 +122,7 @@ export default defineConfig({
       rehypeCodeTitles,
       rehypeCodeBlock,
       rehypePangu,
+      rehypeKatex,
     ],
   },
 });
