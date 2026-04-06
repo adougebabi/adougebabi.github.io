@@ -139,7 +139,7 @@
 
   /* 表格樣式 */
   #post-content table {
-    @apply w-full border-collapse overflow-hidden rounded-lg;
+    @apply block w-full border-collapse overflow-x-auto rounded-lg border border-white/10 whitespace-nowrap;
   }
 
   #post-content th,
@@ -229,7 +229,7 @@
 
   /* 行內 code */
   #post-content :not(pre) > code {
-    @apply rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm transition-colors duration-300;
+    @apply rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm break-all transition-colors duration-300;
   }
 
   #post-content :not(pre) > code:hover {

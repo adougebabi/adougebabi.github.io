@@ -12,7 +12,9 @@ interface Props {
 const { class: className } = Astro.props;
 
 // 檢查defaultOpen的唯一性
-const html = await Astro.slots.render("default");
+const html = await Astro.slots
+  .render("default")
+  .then((result) => result.replace(/&quot;/g, '"'));
 
 // 使用正規表達式檢查標記中出現 data-default-open="true" 的次數
 const defaultOpenCount = (html.match(/data-default-open="true"/g) || []).length;
