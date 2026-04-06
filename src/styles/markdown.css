@@ -200,7 +200,7 @@
       @apply relative;
 
       & .anchor-icon {
-        @apply absolute top-4 -left-4;
+        @apply absolute top-4 -right-4;
       }
     }
 
@@ -281,7 +281,7 @@
 
     /* 锚點樣式 */
     .anchor-icon {
-      @apply text-xl opacity-30 transition-opacity duration-300;
+      @apply opacity-30 transition-opacity duration-300;
     }
 
     .anchor-icon:hover {
