@@ -33,7 +33,7 @@
   }
 
   /* 段落樣式 */
-  #post-content p:not(.content p, .sh-builtin-components p),
+  #post-content p:not(.content p, .sh-builtin-components p, .katex, .katex *),
   #post-content li,
   #post-content ol,
   #post-content ul {
@@ -283,10 +283,10 @@
 
   /* medium-zoom的樣式 */
   .medium-zoom-overlay {
-    @apply z-9 bg-white/5! backdrop-blur-lg;
+    @apply z-60 bg-white/5! backdrop-blur-lg;
   }
 
   .medium-zoom-image--opened {
-    @apply z-10 rounded border-none;
+    @apply z-61 rounded border-none;
   }
 }
