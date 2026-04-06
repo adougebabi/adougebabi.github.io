@@ -1,5 +1,6 @@
 import { Newspaper, Handshake, Home, Info, Phone } from "lucide-react";
 import type { ShBlogConfig } from "../types/shblog.config.d";
+import { Github } from "simple-icons-astro";
 
 const defaultConfig: ShBlogConfig = {
   title: "My Open Source Blog",
@@ -107,7 +108,8 @@ const defaultConfig: ShBlogConfig = {
   friendLinks: [
     {
       title: "範例站點",
-      imgUrl: "/assets/default-avatar.png",
+      imgUrl:
+        "https://gravatar.com/avatar/f7598bd8d4aba38d7219341f81a162fc842376b3b556b1995cbb97271d9e2915?v=1753291388000&size=256&d=initials",
       desc: "這是一個友情連結的範例描述。",
       siteUrl: "https://example.com",
       tags: ["範例"],
@@ -163,7 +165,7 @@ const defaultConfig: ShBlogConfig = {
   footer: {
     description:
       "感謝你的造訪。\n本站致力於提供高品質的內容分享。\n如果喜歡這裡，歡迎關注我的社交媒體。",
-    links: [{ socialMedia: "Github", url: "https://github.com/" }],
+    links: [{ socialMedia: Github, url: "https://github.com/" }],
     copyright: {
       text: "MIT License",
       url: "https://opensource.org/licenses/MIT",
