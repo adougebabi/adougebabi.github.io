@@ -15,258 +15,255 @@
 @layer markdown-content, base, components, utilities;
 
 @layer markdown-content {
-  /* 預設 */
-  #post-content section > * {
-    @apply mb-4;
-  }
+  #post-content {
+    /* 預設 */
+    & section > * {
+      @apply mb-4;
+    }
 
-  /* 段落樣式 */
-  #post-content p:not(.content p, .sh-builtin-components p, .katex, .katex *),
-  #post-content li,
-  #post-content ol,
-  #post-content ul {
-    @apply text-lg leading-relaxed text-neutral-400;
-  }
+    /* 段落樣式 */
+    & p:not(.content p, .sh-builtin-components p, .katex, .katex *),
+    & li,
+    & ol,
+    & ul {
+      @apply text-lg leading-relaxed text-neutral-400;
+    }
 
-  /* 標題樣式 */
-  #post-content h1,
-  #post-content h2,
-  #post-content h3,
-  #post-content h4,
-  #post-content h5,
-  #post-content h6 {
-    @apply font-display my-8! font-bold;
-  }
+    /* 標題樣式 */
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & h5,
+    & h6 {
+      @apply font-display my-8! font-bold;
+    }
 
-  #post-content h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
+    & h1 {
+      @apply text-4xl md:text-5xl lg:text-6xl;
+    }
 
-  #post-content h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
+    & h2 {
+      @apply text-3xl md:text-4xl lg:text-5xl;
+    }
 
-  #post-content h3 {
-    @apply text-2xl md:text-3xl lg:text-4xl;
-  }
+    & h3 {
+      @apply text-2xl md:text-3xl lg:text-4xl;
+    }
 
-  #post-content h4 {
-    @apply text-xl md:text-2xl lg:text-3xl;
-  }
+    & h4 {
+      @apply text-xl md:text-2xl lg:text-3xl;
+    }
 
-  #post-content h5 {
-    @apply text-lg md:text-xl lg:text-2xl;
-  }
+    & h5 {
+      @apply text-lg md:text-xl lg:text-2xl;
+    }
 
-  #post-content h6 {
-    @apply text-lg md:text-lg lg:text-xl;
-  }
+    & h6 {
+      @apply text-lg md:text-lg lg:text-xl;
+    }
 
-  /* 列表樣式 */
-  #post-content ul,
-  #post-content ol {
-    @apply list-outside pl-[30px] marker:text-white/30;
-  }
+    /* 列表樣式 */
+    & ul,
+    & ol {
+      @apply list-outside pl-[30px] marker:text-white/30;
 
-  #post-content li {
-    @apply my-1 mb-2;
-  }
+      & ul,
+      & ol {
+        @apply mb-0! pl-2.5;
 
-  #post-content ul {
-    @apply list-disc;
-  }
+        &:first-child {
+          @apply mt-4 mb-0! pl-6;
+        }
+      }
+    }
 
-  #post-content ol {
-    @apply list-decimal;
-  }
+    & li {
+      @apply my-1 mb-2;
+    }
 
-  #post-content ul ul,
-  #post-content ol ul,
-  #post-content ul ol,
-  #post-content ol ol {
-    @apply mb-0! pl-2.5;
-  }
+    & ul {
+      @apply list-disc;
+    }
 
-  #post-content ul ul:first-child,
-  #post-content ol ul:first-child,
-  #post-content ul ol:first-child,
-  #post-content ol ol:first-child {
-    @apply mt-4 mb-0! pl-6;
-  }
+    & ol {
+      @apply list-decimal;
+    }
 
-  /* 引言樣式 */
-  #post-content blockquote {
-    @apply border-l-4 border-neutral-700 pl-4 font-serif text-neutral-400 italic;
-  }
+    /* 引言樣式 */
+    & blockquote {
+      @apply border-l-4 border-neutral-700 pl-4 font-serif text-neutral-400 italic;
+    }
 
-  /* 程式碼區塊樣式 */
-  .ec-line {
-    @apply font-mono!;
-  }
+    /* 程式碼區塊樣式 */
+    .ec-line {
+      @apply font-mono!;
+    }
 
-  /* 表格樣式 */
-  #post-content table {
-    @apply block w-fit max-w-full border-collapse overflow-x-auto rounded-lg border border-white/10 whitespace-nowrap;
-  }
+    /* 表格樣式 */
+    & table {
+      @apply block w-fit max-w-full border-collapse overflow-x-auto rounded-lg border border-white/10 whitespace-nowrap;
+    }
 
-  #post-content th,
-  #post-content td {
-    @apply border p-2 transition-colors duration-300;
-  }
+    & th,
+    & td {
+      @apply border p-2 transition-colors duration-300;
+    }
 
-  #post-content th {
-    @apply text-left;
-  }
+    & th {
+      @apply text-left;
+    }
 
-  #post-content tbody tr {
-    @apply transition-colors duration-300;
-  }
+    & tbody tr {
+      @apply transition-colors duration-300;
 
-  #post-content tbody tr:nth-child(odd) {
-    /* 奇數行樣式 */
-    @apply bg-neutral-900;
-  }
+      &:nth-child(odd) {
+        /* 奇數行樣式 */
+        @apply bg-neutral-900;
+      }
 
-  #post-content tbody tr:nth-child(even) {
-    /* 偶數行樣式 */
-    @apply bg-neutral-950;
-  }
+      &:nth-child(even) {
+        /* 偶數行樣式 */
+        @apply bg-neutral-950;
+      }
 
-  #post-content tbody tr:nth-child(odd):hover,
-  #post-content tbody tr:nth-child(even):hover {
-    /* 滑鼠懸停樣式 */
-    @apply bg-neutral-800 transition-colors duration-300;
-  }
+      &:nth-child(odd):hover,
+      &:nth-child(even):hover {
+        /* 滑鼠懸停樣式 */
+        @apply bg-neutral-800 transition-colors duration-300;
+      }
+    }
 
-  /* 列 hover 效果 */
-  #post-content td:hover,
-  #post-content th:hover {
-    @apply bg-neutral-700/50;
-  }
+    /* 列 hover 效果 */
+    & td:hover,
+    & th:hover {
+      @apply bg-neutral-700/50;
+    }
 
-  #post-content thead tr {
-    @apply bg-neutral-800;
-  }
+    & thead tr {
+      @apply bg-neutral-800;
+    }
 
-  /* 分隔線樣式 */
-  #post-content hr {
-    @apply mx-auto my-8 max-w-2xl justify-center border-2 border-t border-neutral-700;
-  }
+    /* 分隔線樣式 */
+    & hr {
+      @apply mx-auto my-8 max-w-2xl justify-center border-2 border-t border-neutral-700;
+    }
 
-  /* 行內元素樣式 */
-  #post-content a,
-  #post-content strong,
-  #post-content em,
-  #post-content del,
-  #post-content u,
-  #post-content .spoiler,
-  #post-content code {
-    @apply mx-1;
-  }
+    /* 行內元素樣式 */
+    & a,
+    & strong,
+    & em,
+    & del,
+    & u,
+    & .spoiler,
+    & code {
+      @apply mx-1;
+    }
 
-  #post-content a:not(.sh-builtin-components) {
-    @apply relative px-0.5 text-green-300 transition-all duration-300;
-  }
+    & a:not(.sh-builtin-components) {
+      @apply relative px-0.5 text-green-300 transition-all duration-300;
+    }
 
-  #post-content a:not(.sh-builtin-components)::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -1px; /* 調整底線位置 */
-    width: 100%;
-    height: 6px;
-    background-color: rgba(255, 255, 255, 0.2);
-    transition:
-      transform 0.3s ease,
-      background-color 0.3s ease;
-  }
+    & a:not(.sh-builtin-components)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px; /* 調整底線位置 */
+      width: 100%;
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
+    }
 
-  #post-content a:not(.sh-builtin-components):hover {
-    @apply text-green-400;
-    transform: translateY(-2px);
-  }
+    & a:not(.sh-builtin-components):hover {
+      @apply text-green-400;
+      transform: translateY(-2px);
+    }
 
-  #post-content a:not(.sh-builtin-components):hover::after {
-    background-color: rgba(255, 255, 255, 0.1); /* 底線 hover 效果 */
-  }
+    & a:not(.sh-builtin-components):hover::after {
+      background-color: rgba(255, 255, 255, 0.1); /* 底線 hover 效果 */
+    }
 
-  #post-content strong {
-    @apply font-semibold text-white/80;
-  }
+    & strong {
+      @apply font-semibold text-white/80;
+    }
 
-  /* 行內 code */
-  #post-content :not(pre) > code {
-    @apply rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm break-all transition-colors duration-300;
-  }
+    /* 行內 code */
+    & :not(pre) > code {
+      @apply rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm break-all transition-colors duration-300;
+    }
 
-  #post-content :not(pre) > code:hover {
-    @apply bg-neutral-700;
-  }
+    & :not(pre) > code:hover {
+      @apply bg-neutral-700;
+    }
 
-  /* 圖片樣式 */
-  #post-content img {
-    @apply my-6 rounded-lg;
-  }
+    /* 圖片樣式 */
+    & img {
+      @apply my-6 rounded-lg;
+    }
 
-  /* 圖片置中 */
-  #post-content img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+    /* 圖片置中 */
+    & img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-  /* 音頻和視頻樣式 */
-  #post-content audio,
-  #post-content video {
-    @apply my-6 rounded-lg;
-  }
+    /* 音頻和視頻樣式 */
+    & audio,
+    & video {
+      @apply my-6 rounded-lg;
+    }
 
-  #post-content audio:hover,
-  #post-content video:hover {
-    @apply scale-105 transition-transform duration-300;
-  }
+    & audio:hover,
+    & video:hover {
+      @apply scale-105 transition-transform duration-300;
+    }
 
-  /* 防雷內容 */
-  #post-content .spoiler {
-    @apply bg-neutral-800;
-    color: transparent;
-    border-radius: 4px;
-    padding: 0 4px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    /* 圖層模糊 */
-    filter: blur(4px);
-  }
+    /* 防雷內容 */
+    & .spoiler {
+      @apply bg-neutral-800;
+      color: transparent;
+      border-radius: 4px;
+      padding: 0 4px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      /* 圖層模糊 */
+      filter: blur(4px);
 
-  #post-content .spoiler:hover {
-    color: #fff;
-    filter: blur(0px);
-  }
+      &:hover {
+        color: #fff;
+        filter: blur(0px);
+      }
+    }
 
-  /* 锚點樣式 */
-  .anchor-icon {
-    @apply opacity-30 transition-opacity duration-300;
-  }
+    /* 锚點樣式 */
+    .anchor-icon {
+      @apply opacity-30 transition-opacity duration-300;
+    }
 
-  .anchor-icon:hover {
-    @apply opacity-100;
-  }
+    .anchor-icon:hover {
+      @apply opacity-100;
+    }
 
-  /* 自訂 scrollbar */
-  #post-content *::-webkit-scrollbar {
-    @apply h-1 min-w-2;
-  }
+    /* 自訂 scrollbar */
+    & *::-webkit-scrollbar {
+      @apply h-1 min-w-2;
+    }
 
-  #post-content *::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-neutral-700;
-  }
+    & *::-webkit-scrollbar-thumb {
+      @apply rounded-full bg-neutral-700;
 
-  #post-content *::-webkit-scrollbar-thumb:hover {
-    @apply bg-neutral-600;
-  }
+      & :hover {
+        @apply bg-neutral-600 transition-colors duration-300;
+      }
+    }
 
-  #post-content *::-webkit-scrollbar-track {
-    @apply rounded-full bg-neutral-900;
+    & *::-webkit-scrollbar-track {
+      @apply rounded-full bg-neutral-900;
+    }
   }
 
   /* medium-zoom的樣式 */
