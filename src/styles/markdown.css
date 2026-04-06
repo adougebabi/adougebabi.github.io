@@ -115,31 +115,10 @@
   .ec-line {
     @apply font-mono!;
   }
-  /* 區塊 code 不要 hover 變色 */
-  /* #post-content pre code {
-  @apply bg-transparent px-0 py-0 transition-none;
-}
-
-#post-content em {
-  @apply italic;
-}
-
-#post-content del {
-  @apply line-through;
-}
-
-#post-content u {
-  @apply underline decoration-white/40 decoration-6 transition-all duration-300;
-  text-underline-offset: -2px;
-}
-
-#post-content u:hover {
-  @apply decoration-white/20 transition-all duration-300;
-} */
 
   /* 表格樣式 */
   #post-content table {
-    @apply block w-full border-collapse overflow-x-auto rounded-lg border border-white/10 whitespace-nowrap;
+    @apply block w-fit max-w-full border-collapse overflow-x-auto rounded-lg border border-white/10 whitespace-nowrap;
   }
 
   #post-content th,
@@ -283,5 +262,22 @@
 
   .anchor-icon:hover {
     @apply opacity-100;
+  }
+
+  /* 自訂 scrollbar */
+  #post-content *::-webkit-scrollbar {
+    @apply h-1 min-w-2;
+  }
+
+  #post-content *::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-neutral-700;
+  }
+
+  #post-content *::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-600;
+  }
+
+  #post-content *::-webkit-scrollbar-track {
+    @apply rounded-full bg-neutral-900;
   }
 }
