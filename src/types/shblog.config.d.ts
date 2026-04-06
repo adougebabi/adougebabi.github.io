@@ -120,7 +120,7 @@ interface TimeGreeting {
 }
 
 interface FooterLink {
-  socialMedia: keyof typeof SimpleIcons | string;
+  socialMedia: SimpleIcons | string;
   url: string;
 }
 
