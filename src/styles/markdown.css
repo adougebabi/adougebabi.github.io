@@ -104,7 +104,23 @@
 
     /* 引言樣式 */
     & blockquote {
-      @apply ml-4 border-l-2 border-neutral-700 pl-4 font-serif text-neutral-400 italic transition-colors duration-300 hover:border-green-500/95;
+      @apply ml-4 border-l-2 border-neutral-700 pl-4 font-serif text-neutral-400 italic transition-colors duration-300 group-hover:border-green-500/95;
+
+      & .citation-wrapper {
+        @apply mt-2 text-sm text-neutral-500 transition-colors duration-300 group-hover:text-neutral-400;
+
+        /* 在引用人前方用偽元素加上一條橫線 */
+        & cite.blockquote-citation::before {
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 1px;
+          margin-right: 8px;
+          vertical-align: super;
+
+          @apply bg-neutral-500 transition-colors duration-300 group-hover:bg-neutral-400;
+        }
+      }
     }
 
     /* 程式碼區塊樣式 */
