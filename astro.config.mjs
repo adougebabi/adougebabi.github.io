@@ -33,8 +33,6 @@ import pagefind from "astro-pagefind";
 
 import metaTags from "astro-meta-tags";
 
-import devtoolBreakpoints from "astro-devtool-breakpoints";
-
 import path from "path";
 import { fileURLToPath } from "url";
 import { config as loadEnv } from "dotenv";
@@ -60,7 +58,6 @@ export default defineConfig({
     react(),
     pagefind(),
     metaTags(),
-    devtoolBreakpoints(),
   ],
 
   vite: {
