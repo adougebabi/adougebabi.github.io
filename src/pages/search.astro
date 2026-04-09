@@ -3,12 +3,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Hero from "@components/content/Home/Hero.astro";
 import { HeroSubtitle, HeroTitle } from "@components/content/Home/HeroItems";
 
-import { default as AstroSearch } from "astro-pagefind/components/Search";
+import "@pagefind/component-ui/css";
 
-import "@/styles/pagefind.css";
 import BaseMainContent from "@/layouts/BaseMainContent.astro";
 import Sidebar from "@components/Sidebar.astro";
 import config from "@shConfig";
+
+const isProd = import.meta.env.PROD;
 ---
 
 <BaseLayout
@@ -16,6 +17,18 @@ import config from "@shConfig";
   description={config.pages.other.search.subTitle}
   coverImage={config.pages.other.search.heroImage}
 >
+  {
+    isProd ? (
+      <>
+        <link href="/pagefind/pagefind-component-ui.css" rel="stylesheet" />
+        <script src="/pagefind/pagefind-component-ui.js" type="module" />
+      </>
+    ) : (
+      <script>import('@pagefind/component-ui');</script>
+      <pagefind-config bundle-path="/pagefind/" /> 
+    )
+  }
+
   <!-- Hero Section -->
   <Hero>
     <!-- Left: Main heading -->
@@ -26,12 +39,10 @@ import config from "@shConfig";
   </Hero>
 
   <BaseMainContent>
-    <div class="flex-1">
-      <AstroSearch
-        id="search"
-        className="pagefind-ui"
-        uiOptions={{ showImages: false }}
-      />
+    <div class="flex-1" data-pf-theme="dark">
+      <pagefind-input placeholder="今天要搜些什麼？" autofocus></pagefind-input>
+
+      <pagefind-results></pagefind-results>
     </div>
 
     <!-- Sidebar -->
