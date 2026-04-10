@@ -39,7 +39,7 @@ const isProd = import.meta.env.PROD;
   </Hero>
 
   <BaseMainContent>
-    <div class="flex-1" data-pf-theme="dark">
+    <div class="flex-1">
       <pagefind-input placeholder="今天要搜些什麼？" autofocus></pagefind-input>
 
       <div class="mt-4" id="sh-search-results">
@@ -58,3 +58,25 @@ const isProd = import.meta.env.PROD;
     </aside>
   </BaseMainContent>
 </BaseLayout>
+
+<style>
+  /* Pagefind UI Styles */
+  :root {
+    /* Component UI mappings */
+    --pf-background: var(--background);
+    --pf-text: var(--foreground);
+    --pf-text-secondary: var(--muted-foreground);
+    --pf-border: var(--border);
+    --pf-border-focus: var(--ring);
+    --pf-error-bg: var(--destructive);
+    --pf-error-text: var(--destructive-foreground);
+    --pf-border-radius: var(--radius);
+
+    /* Default/Modular UI mappings */
+    --pagefind-ui-background: var(--background);
+    --pagefind-ui-text: var(--foreground);
+    --pagefind-ui-border: var(--border);
+    --pagefind-ui-primary: var(--primary);
+    --pagefind-ui-border-radius: var(--radius);
+  }
+</style>
