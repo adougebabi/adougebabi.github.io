@@ -39,7 +39,7 @@ const isProd = import.meta.env.PROD;
   </Hero>
 
   <BaseMainContent>
-    <div class="flex-1">
+    <div class="flex-1 min-w-0 max-w-full">
       <pagefind-input placeholder="今天要搜些什麼？" autofocus></pagefind-input>
 
       <div class="mt-4" id="sh-search-results">
@@ -59,24 +59,50 @@ const isProd = import.meta.env.PROD;
   </BaseMainContent>
 </BaseLayout>
 
+<script>
+  import { getInstanceManager } from '@pagefind/component-ui';
+
+  // 檢查是否有網址參數 ?q=，如果有就自動填入搜尋框並觸發搜尋
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get('q');
+
+  if (query) {
+    const input = document.querySelector('input.pf-input') as HTMLInputElement;
+    if (input && input.tagName === 'INPUT') {
+      input.value = query;
+      
+      const instance = getInstanceManager().getInstance("default");
+      instance?.triggerSearch(query);
+    }
+  }
+</script>
+
 <style>
   /* Pagefind UI Styles */
   :root {
-    /* Component UI mappings */
-    --pf-background: var(--background);
+    /* Colors */
     --pf-text: var(--foreground);
     --pf-text-secondary: var(--muted-foreground);
+    --pf-background: var(--background);
     --pf-border: var(--border);
     --pf-border-focus: var(--ring);
-    --pf-error-bg: var(--destructive);
-    --pf-error-text: var(--destructive-foreground);
-    --pf-border-radius: var(--radius);
+    --pf-skeleton: var(--muted);
+    --pf-skeleton-shine: var(--muted-foreground);
+    --pf-hover: var(--accent);
+    --pf-mark: var(--primary);
 
-    /* Default/Modular UI mappings */
-    --pagefind-ui-background: var(--background);
-    --pagefind-ui-text: var(--foreground);
-    --pagefind-ui-border: var(--border);
-    --pagefind-ui-primary: var(--primary);
-    --pagefind-ui-border-radius: var(--radius);
+    /* Error states */
+    --pf-error-bg: color-mix(in oklab, var(--color-red-50) 10%, transparent);;
+    --pf-error-border: var(--color-red-500);
+    --pf-error-text: var(--color-red-500);
+    --pf-error-text-secondary: var(--color-red-600);
+
+    /* Focus ring */
+    --pf-outline-focus: var(--ring);
+    --pf-outline-width: 2px;
+    --pf-outline-offset: 2px;
+
+    /* Typography */
+    --pf-font: "Noto Sans TC", sans-serif;
   }
 </style>
