@@ -40,11 +40,11 @@ const isProd = import.meta.env.PROD;
 
   <BaseMainContent>
     <div class="flex-1" data-pf-theme="dark">
-      <div class="mb-4 flex justify-between">
-        <pagefind-input placeholder="今天要搜些什麼？" autofocus></pagefind-input>
-      </div>
+      <pagefind-input placeholder="今天要搜些什麼？" autofocus></pagefind-input>
 
-      <pagefind-results show-images></pagefind-results>
+      <div class="mt-4" id="sh-search-results">
+        <pagefind-results show-images></pagefind-results>
+      </div>
 
       <div class="mt-4 flex items-center justify-between">
         <pagefind-summary></pagefind-summary>
