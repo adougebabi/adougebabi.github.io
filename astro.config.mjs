@@ -10,6 +10,7 @@ import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import remarkSpoiler from "./src/plugins/remark-spoiler.js";
+import { remarkCitation } from "./src/plugins/remark-citation.mjs";
 
 // @ts-ignore
 import rehypeCodeBlock from "./src/plugins/rehype-code-block.mjs";
@@ -32,8 +33,6 @@ import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
 
 import metaTags from "astro-meta-tags";
-
-import devtoolBreakpoints from "astro-devtool-breakpoints";
 
 import path from "path";
 import { fileURLToPath } from "url";
@@ -60,7 +59,6 @@ export default defineConfig({
     react(),
     pagefind(),
     metaTags(),
-    devtoolBreakpoints(),
   ],
 
   vite: {
@@ -96,9 +94,9 @@ export default defineConfig({
       remarkDirective,
       remarkSectionize,
       remarkSpoiler,
+      remarkCitation,
     ],
     rehypePlugins: [
-      rehypeKatex,
       rehypeSlug,
       [
         rehypeAutolinkHeadings,
@@ -126,6 +124,7 @@ export default defineConfig({
       rehypeCodeTitles,
       rehypeCodeBlock,
       rehypePangu,
+      rehypeKatex,
     ],
   },
 });

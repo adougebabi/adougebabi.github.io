@@ -74,11 +74,13 @@ const currentPage = Number(Astro.url.searchParams.get("page")) || 1;
   <!-- Main content section -->
   <BaseMainContent>
     <!-- Main column: Blog posts grid -->
-    <div class="flex-1" transition:name="main-content">
+    <div class="flex-1" data-pagefind-body transition:name="main-content">
       <BlogList currentPage={currentPage} />
     </div>
 
     <!-- Sidebar -->
-    <Sidebar />
+    <aside class="hidden shrink-0 lg:block lg:w-[300px] xl:w-[380px]">
+      <Sidebar />
+    </aside>
   </BaseMainContent>
 </BaseLayout>

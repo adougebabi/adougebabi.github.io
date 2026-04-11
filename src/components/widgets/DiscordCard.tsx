@@ -16,7 +16,7 @@ export default function DiscordCard({
       <CardContent className="p-0">
         {/* Discord decorative background */}
         {title === "Discord" && (
-          <div className="pointer-events-none absolute top-[95px] left-64">
+          <div className="pointer-events-none absolute top-[95px] -right-10">
             <div className="h-[104px] w-[124px] -rotate-10 opacity-60">
               <svg
                 viewBox="0 0 71 80"

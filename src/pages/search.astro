@@ -3,12 +3,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Hero from "@components/content/Home/Hero.astro";
 import { HeroSubtitle, HeroTitle } from "@components/content/Home/HeroItems";
 
-import { default as AstroSearch } from "astro-pagefind/components/Search";
+import "@pagefind/component-ui/css";
 
-import "@/styles/pagefind.css";
 import BaseMainContent from "@/layouts/BaseMainContent.astro";
 import Sidebar from "@components/Sidebar.astro";
 import config from "@shConfig";
+
+const isProd = import.meta.env.PROD;
 ---
 
 <BaseLayout
@@ -16,6 +17,28 @@ import config from "@shConfig";
   description={config.pages.other.search.subTitle}
   coverImage={config.pages.other.search.heroImage}
 >
+  {
+    isProd ? (
+      <>
+        <link
+          slot="head"
+          href="/pagefind/pagefind-component-ui.css"
+          rel="stylesheet"
+        />
+        <script
+          slot="head"
+          src="/pagefind/pagefind-component-ui.js"
+          type="module"
+        />
+      </>
+    ) : (
+      <>
+        <script slot="head">import('@pagefind/component-ui');</script>
+        <pagefind-config bundle-path="/pagefind/" />
+      </>
+    )
+  }
+
   <!-- Hero Section -->
   <Hero>
     <!-- Left: Main heading -->
@@ -26,14 +49,80 @@ import config from "@shConfig";
   </Hero>
 
   <BaseMainContent>
-    <div class="flex-1">
-      <AstroSearch
-        id="search"
-        className="pagefind-ui"
-        uiOptions={{ showImages: false }}
-      />
+    <div class="max-w-full min-w-0 flex-1" id="sh-search">
+      <pagefind-input placeholder="今天要搜些什麼？" autofocus></pagefind-input>
+
+      <div class="mt-4" id="sh-search-results">
+        <pagefind-results show-images></pagefind-results>
+      </div>
+
+      <div class="mt-4 flex items-center justify-between">
+        <pagefind-summary></pagefind-summary>
+        <pagefind-keyboard-hints></pagefind-keyboard-hints>
+      </div>
     </div>
 
-    <Sidebar />
+    <!-- Sidebar -->
+    <aside class="hidden shrink-0 lg:block lg:w-[300px] xl:w-[380px]">
+      <Sidebar />
+    </aside>
   </BaseMainContent>
 </BaseLayout>
+
+<script is:inline>
+  // 載入時自動聚焦搜尋框
+  window.addEventListener("DOMContentLoaded", () => {
+    const input = document.querySelector("input.pf-input");
+    if (input && input.tagName === "INPUT") {
+      input.focus();
+    }
+  });
+</script>
+
+<script>
+  import { getInstanceManager } from "@pagefind/component-ui";
+
+  // 檢查是否有網址參數 ?q=，如果有就自動填入搜尋框並觸發搜尋
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get("q");
+
+  if (query) {
+    const input = document.querySelector("input.pf-input") as HTMLInputElement;
+    if (input && input.tagName === "INPUT") {
+      input.value = query;
+
+      const instance = getInstanceManager().getInstance("default");
+      instance?.triggerSearch(query);
+    }
+  }
+</script>
+
+<style>
+  /* Pagefind UI Styles */
+  #sh-search {
+    /* Colors */
+    --pf-text: var(--foreground);
+    --pf-text-secondary: var(--muted-foreground);
+    --pf-background: var(--background);
+    --pf-border: var(--border);
+    --pf-border-focus: var(--ring);
+    --pf-skeleton: var(--muted);
+    --pf-skeleton-shine: var(--muted-foreground);
+    --pf-hover: var(--accent);
+    --pf-mark: var(--primary);
+
+    /* Error states */
+    --pf-error-bg: color-mix(in oklab, var(--color-red-50) 10%, transparent);
+    --pf-error-border: var(--color-red-500);
+    --pf-error-text: var(--color-red-500);
+    --pf-error-text-secondary: var(--color-red-600);
+
+    /* Focus ring */
+    --pf-outline-focus: var(--ring);
+    --pf-outline-width: 2px;
+    --pf-outline-offset: 2px;
+
+    /* Typography */
+    --pf-font: "Noto Sans TC", sans-serif;
+  }
+</style>

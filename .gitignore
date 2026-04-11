@@ -33,3 +33,5 @@ wrangler.jsonc
 .wrangler/*
 
 public/_headers
+
+public/pagefind/*

@@ -58,10 +58,15 @@ const FAVICON = config.favicon || "/favicon.svg";
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
+<meta
+  property="twitter:title"
+  data-pagefind-default-meta="title"
+  content={title}
+/>
 <meta property="twitter:description" content={description} />
 <meta
   property="twitter:image"
+  data-pagefind-default-meta="image[content]"
   content={new URL(typeof image === "string" ? image : image.src, Astro.url)}
 />
 

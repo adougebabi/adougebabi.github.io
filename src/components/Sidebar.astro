@@ -5,7 +5,7 @@ import DiscordCard from "./widgets/DiscordCard";
 ---
 
 <!-- Sidebar -->
-<aside class="flex w-full flex-col gap-5 lg:w-95">
+<div class="flex w-full flex-col gap-5" data-pagefind-ignore>
   <!-- Author card -->
   <AuthorCard
     client:load
@@ -36,4 +36,4 @@ import DiscordCard from "./widgets/DiscordCard";
 
   <!-- Never remove this slot, it's for the Table of Contents (ToC) - which will be sticky -->
   <slot />
-</aside>
+</div>
