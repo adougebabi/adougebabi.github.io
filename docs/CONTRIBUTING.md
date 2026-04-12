@@ -24,6 +24,10 @@ We welcome contributions from the community! Whether you're fixing a bug, adding
    ```
 7. **Create a Pull Request**: Go to the original repository and create a pull request from your forked repository's branch.
 
+## Translating
+
+This project have multilingual support, if you want to help translating the documentation or the website content, please refer to the [Translation Guide](TRANSLATION.md) for more details.
+
 ## Code of Conduct
 
 By participating in this project, you agree to abide by the [Code of Conduct](CODE_OF_CONDUCT.md). Please read it to understand the expectations for behavior within this community.

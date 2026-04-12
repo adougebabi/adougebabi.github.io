@@ -55,13 +55,14 @@ For detailed deployment information, refer to [DEPLOYMENT.md](DEPLOYMENT.md).
 - [x] Real-time search suggestions based on Pagefind
 - [x] Default support for Google Tag Manager
 - [x] Featured 404 page
+- [x] Support for multiple languages
 
 Developers interested in this project are welcome to participate. If you have any suggestions or issues, feel free to raise an Issue or Pull Request.
 
 ## 👀 Version Requirements
 
 - Node.js v22 or higher
-- pnpm v9 or higher
+- pnpm v10 or higher
 
 ## 🔧 Config File Translation
 
@@ -79,8 +80,11 @@ Special thanks to the following projects and resources for their support：
 - [TailwindCSS](https://tailwindcss.com/)
 - [React](https://react.dev/)
 - [MDX](https://mdxjs.com/)
-- [Vercel](https://vercel.com/) for providing cloud deployment services (used for deploying the Demo site)
-- [Stable Diffusion A1111 WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui) for image generation technology and the [wainsfwillustrious model](https://civitai.com/models/827184/wai-illustrious-sdxl) (used for generating the blog key visual image)
+- Cloud deployment service provided by [Vercel](https://vercel.com/) (for deploying demo sites)
+- Full-text search solution provided by [Pagefind](https://pagefind.app/)
+- Guestbook solutions provided by [Giscus](https://giscus.app/) and [Utterances](https://utteranc.es/)
+- [Pangu.js](https://github.com/vinta/pangu.js) helps improve the quality of Chinese typesetting
+- Image generation technology provided by [Stable Diffusion A1111 WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui) and [wainsfwillustrious model](https://civitai.com/models/827184/wai-illustrious-sdxl) (used to generate key visuals for the blog)
 
 Additionally, thanks to the following websites for design inspiration：
 

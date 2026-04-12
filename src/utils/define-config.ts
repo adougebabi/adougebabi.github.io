@@ -167,11 +167,11 @@ const defaultConfig: ShBlogConfig = {
       "感謝你的造訪。\n本站致力於提供高品質的內容分享。\n如果喜歡這裡，歡迎關注我的社交媒體。",
     links: [{ socialMedia: Github, url: "https://github.com/" }],
     copyright: {
-      text: "MIT License",
-      url: "https://opensource.org/licenses/MIT",
-      yearUpdateStrategy: "auto",
+      text: "CC BY-NC 4.0", // 版權使用說明文字
+      url: "https://creativecommons.org/licenses/by-nc/4.0/", // 版權使用說明連結網址（e.g. 創用CC、MIT、GPL 等等）
+      yearUpdateStrategy: "auto", // 版權年份更新策略，auto 表示自動更新為當前年份、fixed 表示編譯網站時的年份，固定年份請直接填寫年份數字，例如 2023
     },
-    countryEmoji: "🌐",
+    countryEmoji: "🇹🇼", // 所屬國家國旗Emoji，如台灣國旗 🇹🇼 等
   },
 };
 

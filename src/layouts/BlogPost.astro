@@ -179,3 +179,30 @@ const { title, description, pubDate, updatedDate, heroImage, headings, tags } =
     }
   });
 </script>
+
+<script>
+  import mediumZoom from "medium-zoom";
+
+  let zoom: ReturnType<typeof mediumZoom> | null = null;
+
+  const attachMediumZoom = () => {
+    zoom?.detach();
+    zoom = mediumZoom("[data-zoomable]", {
+      margin: 24,
+      background: "rgba(0, 0, 0, 0.8)",
+      scrollOffset: 40,
+    });
+  };
+
+  const detachMediumZoom = () => {
+    zoom?.detach();
+  };
+
+  // 支持 Astro ClientRouter/Transitions：每次页面加载后重新绑定，切换前清理
+  document.addEventListener("astro:page-load", attachMediumZoom);
+  document.addEventListener("astro:before-swap", detachMediumZoom);
+
+  // 首次完整加载时立即初始化
+  attachMediumZoom();
+  // console.log("[Medium Zoom] ImagePacked component loaded");
+</script>

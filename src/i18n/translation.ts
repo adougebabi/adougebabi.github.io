@@ -1,7 +1,7 @@
 import config from "@shConfig";
 import type I18nKey from "./i18nKey";
 
-// 匯入各語言的翻譯檔
+// Import translations for supported languages
 import { en } from "./languages/en.ts";
 import { zh_TW } from "./languages/zh_TW.ts";
 
@@ -11,6 +11,7 @@ export type Translation = {
 
 const defaultTranslation = en;
 
+// Config your language map here, the key should be the language code in lowercase, and the value should be the corresponding translation object.
 const map: { [key: string]: Translation } = {
   // 建立語言代碼與翻譯檔的對應關係
   en: en,

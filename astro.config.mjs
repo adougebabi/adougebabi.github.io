@@ -11,6 +11,7 @@ import remarkSectionize from "remark-sectionize";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import remarkSpoiler from "./src/plugins/remark-spoiler.js";
 import { remarkCitation } from "./src/plugins/remark-citation.mjs";
+import { remarkZoomableImage } from "./src/plugins/remark-zoomable-image.mjs";
 
 // @ts-ignore
 import rehypeCodeBlock from "./src/plugins/rehype-code-block.mjs";
@@ -95,6 +96,7 @@ export default defineConfig({
       remarkSectionize,
       remarkSpoiler,
       remarkCitation,
+      remarkZoomableImage,
     ],
     rehypePlugins: [
       rehypeSlug,

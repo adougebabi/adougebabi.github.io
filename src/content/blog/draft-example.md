@@ -14,6 +14,8 @@ draft: true
 
 在生產環境（`nr build` + `nr preview`）中，這篇文章不會被編譯和顯示。
 
+![Image Example](../../assets/blog-placeholder-3.jpg)
+
 ## 如何使用
 
 在文章的 frontmatter 中設置 `draft` 屬性：

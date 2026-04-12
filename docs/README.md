@@ -17,6 +17,7 @@
   <a href="https://github.com/510208/sh-blog-next"><img src="https://img.shields.io/github/stars/510208/sh-blog-next?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Stars" /></a>
   <a href="https://github.com/510208/sh-blog-next/issues"><img src="https://img.shields.io/github/issues/510208/sh-blog-next?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Issues" /></a>
   <a href="https://sh-blog-next.vercel.app/"><img src="https://img.shields.io/badge/Demo-223222.svg?style=for-the-badge&logo=vercel&logoColor=white" alt="GitHub Issues" /></a>
+  <a href="https://deepwiki.com/510208/sh-blog-next"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 </div>
 
 這是 SamHacker 的個人技術部落格，使用 [Astro](https://astro.build/) 與 [TailwindCSS](https://tailwindcss.com/) 所打造，搭配 [React](https://reactjs.org/)，結合了 MDX 作為文章內容的撰寫方式。
@@ -60,6 +61,7 @@ pnpm preview
 - [x] 特色 404 頁面
 - [x] 內建對 `Pangu.js` 的支援以自動處理中文排版
 - [x] 提供如 GitHub 卡片、資料夾結構、步驟指示器等多種內建組件以豐富內容呈現
+- [x] 支援多國語系
 
 > [!NOTE]
 > Pangu是一個自動調整中英文、數字與符號間距的工具，在文章中出現中英文交雜的情況下，會在中英文間加入適當的空格以提升閱讀體驗。
@@ -75,7 +77,7 @@ pnpm preview
 ## 👀 版本需求
 
 - Node.js v22 以上
-- pnpm v9 以上
+- pnpm v10 以上
 
 ## 🤝 協助開發
 
@@ -85,12 +87,13 @@ pnpm preview
 
 特別感謝以下專案與資源的支持：
 
-- [Astro](https://astro.build/)
+- [Astro.js](https://astro.build/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [React](https://react.dev/)
 - [MDX](https://mdxjs.com/)
 - [Vercel](https://vercel.com/) 提供的雲端部署服務（用於部署Demo站）
 - [Pagefind](https://pagefind.app/) 提供的全文搜尋解決方案
+- [Medium Zoom](https://medium-zoom.francoischalifour.com/) 提供的燈箱功能
 - [Giscus](https://giscus.app/) 與 [Utterances](https://utteranc.es/) 提供的留言板解決方案
 - [Pangu.js](https://github.com/vinta/pangu.js) 協助提升中文排版品質
 - [Stable Diffusion A1111 WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui) 提供的圖片生成技術與 [wainsfwillustrious模型](https://civitai.com/models/827184/wai-illustrious-sdxl)（用於生成部落格關鍵視覺圖）
