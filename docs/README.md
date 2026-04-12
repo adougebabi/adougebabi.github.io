@@ -17,6 +17,7 @@
   <a href="https://github.com/510208/sh-blog-next"><img src="https://img.shields.io/github/stars/510208/sh-blog-next?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Stars" /></a>
   <a href="https://github.com/510208/sh-blog-next/issues"><img src="https://img.shields.io/github/issues/510208/sh-blog-next?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Issues" /></a>
   <a href="https://sh-blog-next.vercel.app/"><img src="https://img.shields.io/badge/Demo-223222.svg?style=for-the-badge&logo=vercel&logoColor=white" alt="GitHub Issues" /></a>
+  <a href="https://deepwiki.com/510208/sh-blog-next"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 </div>
 
 這是 SamHacker 的個人技術部落格，使用 [Astro](https://astro.build/) 與 [TailwindCSS](https://tailwindcss.com/) 所打造，搭配 [React](https://reactjs.org/)，結合了 MDX 作為文章內容的撰寫方式。
