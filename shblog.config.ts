@@ -518,7 +518,7 @@ const config = defineConfig({
     name: "阿兜咪爸爸",
     bio: "后端技术负责人/架构师，专注于微服务架构、分布式系统、高并发调优等技术领域。精通 Spring Cloud Alibaba 生态，具备丰富的系统架构设计与性能优化经验。",
     email: "646911949@qq.com",
-    avatarUrl: "https://gravatar.com/avatar/default?size=256&d=identicon",
+    avatarUrl: "https://avatars.githubusercontent.com/u/19430567?v=4&size=64",
     links: [
       {
         icon: "Github",

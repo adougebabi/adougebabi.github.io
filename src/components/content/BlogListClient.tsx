@@ -17,7 +17,7 @@ type Post = {
     title: string;
     description?: string;
     pubDate: string; // serialized ISO string
-    heroImage?: { src: string } | null;
+    heroImage?: string | null;
     category: string | string[] | null;
     tags: string[] | null;
   };
@@ -91,7 +91,7 @@ export default function BlogListClient({
                 title={post.data.title}
                 description={post.data.description}
                 pubDate={post.data.pubDate.toISOString()}
-                heroImage={post.data.heroImage?.src || DEFAULT_POST_IMAGE}
+                heroImage={post.data.heroImage || DEFAULT_POST_IMAGE}
                 category={post.data.category}
                 tags={post.data.tags}
                 href={`/blog/${post.id}/`}

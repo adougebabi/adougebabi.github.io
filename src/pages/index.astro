@@ -32,7 +32,7 @@ const currentPage = Number(Astro.url.searchParams.get("page")) || 1;
   coverImage={config.pages.home.heroImage}
 >
   <!-- Hero Section -->
-  <Hero>
+  <Hero backgroundImage={config.pages.home.heroImage}>
     <!-- Left: Main heading -->
     <div class="lg:col-span-2" slot="left">
       <HeroTitle>

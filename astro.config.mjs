@@ -47,7 +47,7 @@ loadEnv();
 export default defineConfig({
   site: process.env.SITE_URL || "https://adougebabi-github-io.pages.dev",
   image: {
-    domains: ["raw.giteeusercontent.com","images.unsplash.com"],
+    domains: ["raw.giteeusercontent.com","images.unsplash.com","avatars.githubusercontent.com"],
   },
   integrations: [
     AutoImport({
