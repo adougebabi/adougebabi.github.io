@@ -302,7 +302,7 @@ Failed: root directory not found
 
 ### 相关资源
 
-- **新博客地址**：https://adougebabi-github-io.pages.dev
+- **新博客地址**：https://blog.adoumi.site
 - **GitHub 仓库**：https://github.com/adougebabi/adougebabi.github.io
 - **Astro 文档**：https://docs.astro.build
 - **主题仓库**：https://github.com/510208/sh-blog-next
