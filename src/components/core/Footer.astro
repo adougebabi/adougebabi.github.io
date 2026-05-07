@@ -9,7 +9,7 @@ let year: number | null = null;
 if (config.footer.copyright.yearUpdateStrategy === "fixed") {
   year = new Date().getFullYear();
 } else if (typeof config.footer.copyright.yearUpdateStrategy === "number") {
-  // 如果是固定的時間（number）
+  // 如果是固定的时间（number）
   year = config.footer.copyright.yearUpdateStrategy;
 }
 ---
@@ -70,15 +70,15 @@ if (config.footer.copyright.yearUpdateStrategy === "fixed") {
         <!-- Top section -->
         <div class="space-y-2">
           <p class="text-white text-sm leading-normal">
-            歡迎非商業性轉載，轉載時請務必註明原文作者與原文連結
+            欢迎非商业性转载，转载时请务必注明原文作者与原文链接
             <br />
-            如需商業合作授權,請來信洽談：
+            如需商业合作授权，请来信洽谈：
             <span class="underline decoration-solid">
               {config.author.email}
             </span>
           </p>
         </div>
-
+`
         <!-- Bottom section -->
         <div class="space-y-2">
           <div class="text-white text-[10px] leading-normal">

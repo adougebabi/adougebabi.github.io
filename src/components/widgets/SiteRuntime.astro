@@ -3,7 +3,7 @@ const startDate = new Date("2019-11-23");
 ---
 
 <div id="site-runtime" class="text-sm text-black opacity-75 dark:text-white">
-  網站已運行：<span id="runtime-counter">計算中...</span>
+  网站已运行：<span id="runtime-counter">计算中...</span>
 </div>
 
 <script is:inline define:vars={{ startDate }}>
@@ -31,10 +31,10 @@ const startDate = new Date("2019-11-23");
     }
 
     if (months > 0 || years > 0) {
-      runtimeText += `${months} 個月 `;
+      runtimeText += `${months} 个月 `;
     }
 
-    runtimeText += `${days} 天 ${hours} 時 ${minutes} 分 ${seconds} 秒`;
+    runtimeText += `${days} 天 ${hours} 时 ${minutes} 分 ${seconds} 秒`;
 
     const runtimeElement = document.getElementById("runtime-counter");
     if (runtimeElement) {

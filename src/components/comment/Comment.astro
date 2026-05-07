@@ -12,7 +12,7 @@ const UTTERANCES_ENABLED =
 const UTTERANCES_CONFIG = config.behavior.commentConfig.utterancesConfig;
 const COMMENT_DISABLED = config.behavior.commentConfig.enableComment === "None";
 
-// 開發階段檢查 Utterances repo 是否存在
+// 开发阶段检查 Utterances repo 是否存在
 let UTTERANCES_REPO_EXISTS = true;
 if (import.meta.env.DEV && UTTERANCES_ENABLED) {
   const repo = UTTERANCES_CONFIG.repo;
@@ -24,13 +24,13 @@ if (import.meta.env.DEV && UTTERANCES_ENABLED) {
     });
     if (!response.ok) {
       console.warn(
-        `⚠️ Utterances 設定警告: GitHub repo "${repo}" 不存在或無法存取 (狀態碼: ${response.status})`,
+        `⚠️ Utterances 设定警告: GitHub repo "${repo}" 不存在或无法访问 (状态码: ${response.status})`,
       );
       UTTERANCES_REPO_EXISTS = false;
     }
   } catch (error) {
     console.warn(
-      `⚠️ Utterances 設定警告: 無法驗證 GitHub repo "${repo}"`,
+      `⚠️ Utterances 设定警告: 无法验证 GitHub repo "${repo}"`,
       error,
     );
   }
@@ -91,6 +91,6 @@ if (import.meta.env.DEV && UTTERANCES_ENABLED) {
 
         document.querySelector("#comments")?.appendChild(script);
       </script>
-    ) || ( <p class="text-red-600"><strong>警告！</strong> Utterances 的 GitHub repo 不存在或無法存取。</p> )
+    ) || ( <p class="text-red-600"><strong>警告！</strong> Utterances 的 GitHub repo 不存在或无法访问。</p> )
   )
 }

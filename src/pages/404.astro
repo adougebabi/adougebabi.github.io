@@ -1,27 +1,16 @@
 ---
 import "@/styles/global.css";
-
 import BaseHead from "@components/core/BaseHead.astro";
 import { SEPARATOR, SITE_TITLE } from "@/consts";
-
-import { Kbd, KbdGroup } from "@ui/kbd";
 import config from "@shConfig";
-
 import i18n from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
 
-const locale = config.lang || "zh-Hant";
+const locale = config.lang || "zh-CN";
 ---
 
 <!doctype html>
 <html lang={locale}>
-  <!-- 
-    冷知識,
-    如果你看到了這則注釋,那你應該也是個網頁大神。
-    沒錯,這個頁面還有其他小彩蛋！
-    例如如果在網址列加入 "rick"、"114514" 或 "uwu" 等關鍵字,頁面就會出現神奇的變化喔！
-    試試看吧！
-  -->
   <head>
     <BaseHead
       title={`${i18n(I18nKey.notfound_title)} ${SEPARATOR} ${SITE_TITLE}`}
@@ -29,145 +18,374 @@ const locale = config.lang || "zh-Hant";
     />
   </head>
   <body>
-    <div
-      class="flex min-h-screen w-screen flex-col bg-[#0078d7] px-4 pt-6 pb-32 sm:px-8 sm:pt-10 sm:pb-20 lg:px-50 lg:pt-27"
-    >
-      <!-- 主要內容 -->
-      <div class="flex w-full flex-col items-start justify-start gap-0">
-        <h1 class="text-7xl font-normal sm:text-9xl lg:text-[200px]">
-          {Math.random() < 0.1 ? ":)" : ":("}
-        </h1>
-        <h2
-          class="mt-6 ml-1 text-xl font-thin sm:ml-2 sm:text-3xl lg:text-5xl/16"
-        >
-          {i18n(I18nKey.notfound_bsod_title_line_1)}<br />
-          {i18n(I18nKey.notfound_bsod_title_line_2)}
-        </h2>
-        <h2
-          id="progress"
-          class="mt-4 ml-2 text-xl font-thin sm:mt-6 sm:ml-4 sm:text-3xl lg:text-5xl/16"
-        >
-          {i18n(I18nKey.notfound_finished_percent_description)} 0%
-        </h2>
+    <div class="cat-404-container">
+      <svg class="cat-404" viewBox="0 0 600 350" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- Group for the whole composition -->
+        <g class="composition">
+
+          <!-- THE '0' -> HEAD -->
+          <g class="head-group">
+            <!-- Background fill for the head -->
+            <ellipse class="digit-0-bg" cx="300" cy="200" rx="35" ry="70" />
+            <!-- The Outline (strokes) -->
+            <ellipse class="digit-0-outline" cx="300" cy="200" rx="35" ry="70" />
+          </g>
+
+          <!-- THE '4' (Left) -> LEFT EAR -->
+          <g class="digit-4 left-4">
+            <!-- Triangle part: Morphing path -->
+            <path class="ear-shape left-ear-path" d="M220,140 L160,220 Q190,220 220,220 Z" />
+            <!-- Vertical line (Stem) -->
+            <line class="stem" x1="220" y1="140" x2="220" y2="280" />
+          </g>
+
+          <!-- THE '4' (Right) -> RIGHT EAR -->
+          <g class="digit-4 right-4">
+            <!-- Triangle part: Morphing path -->
+            <path class="ear-shape right-ear-path" d="M440,140 L380,220 Q410,220 440,220 Z" />
+            <!-- Vertical line (Stem) -->
+            <line class="stem" x1="440" y1="140" x2="440" y2="280" />
+          </g>
+
+          <!-- FACE FEATURES -->
+          <g class="face-features">
+            <!-- Eyes -->
+            <g class="eyes-group">
+              <ellipse class="eye" cx="260" cy="195" rx="9" ry="13" />
+              <circle class="eye-highlight" cx="264" cy="191" r="3" />
+
+              <ellipse class="eye" cx="340" cy="195" rx="9" ry="13" />
+              <circle class="eye-highlight" cx="344" cy="191" r="3" />
+            </g>
+
+            <!-- Nose (Soft Rounded Triangle) -->
+            <path class="nose" d="M292,218 Q300,215 308,218 L300,226 Z" />
+
+            <!-- Mouth (Simple Cute Curves, Disconnected) -->
+            <path class="mouth" d="M300,226 Q290,236 280,228" />
+            <path class="mouth" d="M300,226 Q310,236 320,228" />
+
+            <!-- Whiskers (Straight, fanning out) -->
+            <g class="whiskers">
+              <line x1="240" y1="215" x2="190" y2="205" />
+              <line x1="240" y1="225" x2="190" y2="225" />
+              <line x1="240" y1="235" x2="190" y2="245" />
+
+              <line x1="360" y1="215" x2="410" y2="205" />
+              <line x1="360" y1="225" x2="410" y2="225" />
+              <line x1="360" y1="235" x2="410" y2="245" />
+            </g>
+          </g>
+        </g>
+      </svg>
+
+      <div class="message-container">
+        <p class="fade-text">{i18n(I18nKey.notfound_please_go_back_normal)}</p>
       </div>
-      <div
-        class="mt-4 ml-2 flex flex-col gap-4 sm:mt-6 sm:ml-4 sm:flex-row sm:gap-6"
-      >
-        <div
-          class="flex h-24 w-24 shrink-0 justify-center bg-white p-2 align-middle sm:h-30 sm:w-30"
-        >
-          <img
-            id="qr-image"
-            src="/assets/layouts/404/404_qr.svg"
-            class="m-auto"
-            alt="Windows Logo"
-          />
-        </div>
-        <div
-          class="max-w-full text-sm font-light text-white sm:max-w-lg sm:text-base"
-        >
-          <p id="description" class="wrap-break-word">
-            {i18n(I18nKey.notfound_please_go_back_normal)}
-          </p>
-          <p class="mt-4 sm:mt-10">
-            {i18n(I18nKey.notfound_bsod_description_1)}
-          </p>
-          <p>{i18n(I18nKey.notfound_bsod_description_2)}</p>
-          <p id="failed-item" class="break-all">
-            {i18n(I18nKey.notfound_bsod_failed_item)}
-          </p>
-        </div>
+
+      <div class="actions">
+        <a href="/" class="action-btn home-btn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>返回首页</span>
+        </a>
+        <a href="/blog" class="action-btn archive-btn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          <span>浏览文章</span>
+        </a>
       </div>
-    </div>
-    <div
-      id="info"
-      hidden
-      class="fixed bottom-4 left-1/2 max-w-[90vw] -translate-x-1/2 rounded-xl bg-blue-600/60 px-3 py-2 text-center text-sm sm:bottom-10 sm:left-4/9 sm:max-w-none sm:translate-x-0 sm:px-4 sm:text-left sm:text-base"
-    >
-      {i18n(I18nKey.notfound_press_any_key_1)}
-      <KbdGroup><Kbd>{i18n(I18nKey.notfound_press_any_key_2)}</Kbd></KbdGroup>
-      {i18n(I18nKey.notfound_press_any_key_3)}
     </div>
   </body>
 </html>
 
-<script
-  is:inline
-  define:vars={{
-    notfound_finished_percent_description: i18n(
-      I18nKey.notfound_finished_percent_description,
-    ),
-    enable404EasterEgg: config.behavior.enable404EasterEgg,
-    i18n_normal: i18n(I18nKey.notfound_please_go_back_normal),
-    i18n_rickroll: i18n(I18nKey.notfound_please_go_back_rickroll),
-    i18n_homo: i18n(I18nKey.notfound_please_go_back_homo),
-    i18n_failed_item: i18n(I18nKey.notfound_bsod_failed_item),
-  }}
->
-  // 彩蛋邏輯
-  const url = window.location.href;
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+  }
 
-  let qr_img = "/assets/layouts/404/404_qr.svg";
-  let description =
-    i18n_normal ||
-    "如需此問題與可能修正的詳細資訊,請前往 https://api.samhacker.xyz/404 觀看詳細資訊。";
+  .cat-404-container {
+    /* 配色方案 - 适配深色主题 */
+    --c-stroke: #60a5fa;
+    --c-head-bg: rgba(96, 165, 250, 0.1);
+    --c-ear-fill: rgba(96, 165, 250, 0.15);
+    --c-nose: #93c5fd;
+    --c-features: #9ca3af;
 
-  if (enable404EasterEgg) {
-    if (url.toLowerCase().includes("rick")) {
-      qr_img = "/assets/layouts/404/404_rickroll.svg";
-      description =
-        i18n_rickroll ||
-        "如需此問題與可能修正的詳細資訊,請前往 https://api.samhacker.xyz/rick 觀看驚喜影片";
-    } else if (
-      url.toLowerCase().includes("114514") ||
-      url.toLowerCase().includes("1919810")
-    ) {
-      qr_img = "/assets/layouts/404/404_yajyuusenpai.png";
-      description =
-        i18n_homo || "如需此問題與可能修正的詳細資訊,請先重新看一遍銀夢(確信";
-    } else if (url.toLowerCase().includes("uwu")) {
-      qr_img = "/assets/layouts/404/404_uwu.png";
+    --anim-dur: 6s;
+
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inter Variable", "Noto Sans SC Variable", sans-serif;
+  }
+
+  .cat-404 {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* --- ANIMATIONS --- */
+
+  /* HEAD: 0 -> Face */
+  .digit-0-bg {
+    fill: var(--c-head-bg);
+    opacity: 0;
+    transform-origin: center;
+    animation: head-bg var(--anim-dur) ease-in-out infinite;
+  }
+
+  .digit-0-outline {
+    fill: none;
+    stroke: var(--c-stroke);
+    stroke-width: 12;
+    stroke-linecap: round;
+    transform-origin: center;
+    animation: head-outline var(--anim-dur) ease-in-out infinite;
+  }
+
+  .nose {
+    fill: var(--c-nose);
+  }
+
+  @keyframes head-bg {
+    0%, 20% { rx: 35; ry: 70; opacity: 0; }
+    35%, 75% { rx: 130; ry: 95; opacity: 1; }
+    90%, 100% { rx: 35; ry: 70; opacity: 0; }
+  }
+
+  @keyframes head-outline {
+    0%, 20% { rx: 35; ry: 70; stroke-width: 12; }
+    35%, 75% { rx: 130; ry: 95; stroke-width: 8; }
+    90%, 100% { rx: 35; ry: 70; stroke-width: 12; }
+  }
+
+  /* EARS: 4 -> Triangle */
+  .ear-shape {
+    fill: none;
+    stroke: var(--c-stroke);
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .stem {
+    stroke: var(--c-stroke);
+    stroke-width: 12;
+    stroke-linecap: round;
+  }
+
+  /* Left Ear Animation */
+  .left-ear-path {
+    animation: left-ear-morph var(--anim-dur) ease-in-out infinite,
+               ear-color-l var(--anim-dur) ease-in-out infinite;
+  }
+
+  @keyframes left-ear-morph {
+    0%, 20% {
+      d: path("M220,140 L160,220 Q190,220 220,220 Z");
+    }
+    35%, 75% {
+      d: path("M180,50 L200,140 Q230,115 260,110 Z");
+    }
+    90%, 100% {
+      d: path("M220,140 L160,220 Q190,220 220,220 Z");
     }
   }
 
-  // 更新 DOM
-  const qrImage = document.getElementById("qr-image");
-  const descriptionElement = document.getElementById("description");
-  const failedItemElement = document.getElementById("failed-item");
-
-  if (qrImage) qrImage.src = qr_img;
-  if (descriptionElement) descriptionElement.textContent = description;
-  if (failedItemElement) {
-    const urlPath = url.toLowerCase().replace(/^https?:\/\//, "");
-    failedItemElement.textContent = `${i18n_failed_item}${urlPath}.lnk`;
+  .left-4 .stem {
+    animation: stem-fade var(--anim-dur) ease-in-out infinite;
   }
 
-  // 模擬進度條
-  let progress = 0;
-  const progressElement = document.getElementById("progress");
-  const intervalId = window.setInterval(() => {
-    if (progress < 100) {
-      progress += Math.floor(Math.random() * 10) + 1; // 每次增加1-10%
-      if (progress > 100) {
-        progress = 100;
-        // 移除 #info 的hidden屬性
-        const infoElement = document.getElementById("info");
-        if (infoElement) {
-          infoElement.hidden = false;
-        } else {
-          console.error("找不到 #info 元素");
-        }
-        // 停止更新進度條
-        window.clearInterval(intervalId);
-        // 監聽鍵盤事件,按下任意鍵返回首頁
-        document.addEventListener("keydown", () => {
-          window.location.href = "/";
-        });
-      }
-      if (progressElement)
-        progressElement.textContent = `${notfound_finished_percent_description} ${progress}%`;
-    } else {
-      window.clearInterval(intervalId);
+  /* Right Ear Animation */
+  .right-ear-path {
+    animation: right-ear-morph var(--anim-dur) ease-in-out infinite,
+               ear-color-r var(--anim-dur) ease-in-out infinite;
+  }
+
+  @keyframes right-ear-morph {
+    0%, 20% {
+      d: path("M440,140 L380,220 Q410,220 440,220 Z");
     }
-  }, 1000);
-</script>
+    35%, 75% {
+      d: path("M420,50 L340,110 Q370,115 400,140 Z");
+    }
+    90%, 100% {
+      d: path("M440,140 L380,220 Q410,220 440,220 Z");
+    }
+  }
+
+  .right-4 .stem {
+    animation: stem-fade var(--anim-dur) ease-in-out infinite;
+  }
+
+  @keyframes stem-fade {
+    0%, 20% { opacity: 1; stroke-dasharray: 200; stroke-dashoffset: 0; }
+    30%, 80% { opacity: 0; stroke-dashoffset: 200; }
+    90%, 100% { opacity: 1; stroke-dashoffset: 0; }
+  }
+
+  @keyframes ear-color-l {
+    0%, 20% { fill: transparent; stroke-width: 12; }
+    35%, 75% { fill: var(--c-ear-fill); stroke-width: 6; stroke: var(--c-stroke); }
+    90%, 100% { fill: transparent; stroke-width: 12; }
+  }
+
+  @keyframes ear-color-r {
+    0%, 20% { fill: transparent; stroke-width: 12; }
+    35%, 75% { fill: var(--c-ear-fill); stroke-width: 6; stroke: var(--c-stroke); }
+    90%, 100% { fill: transparent; stroke-width: 12; }
+  }
+
+  /* FEATURES */
+  .face-features {
+    animation: features-fade var(--anim-dur) ease-in-out infinite;
+    transform-origin: 300px 200px;
+  }
+
+  @keyframes features-fade {
+    0%, 25% { opacity: 0; transform: scale(0.9); }
+    35%, 75% { opacity: 1; transform: scale(1); }
+    85%, 100% { opacity: 0; transform: scale(0.9); }
+  }
+
+  .eye {
+    fill: var(--c-features);
+  }
+
+  .eye-highlight {
+    fill: white;
+  }
+
+  .mouth {
+    stroke: var(--c-features);
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .whiskers {
+    stroke: var(--c-features);
+    stroke-width: 2;
+    stroke-linecap: round;
+    fill: none;
+    animation: whiskers-twitch var(--anim-dur) ease-in-out infinite;
+    transform-origin: 300px 200px;
+  }
+
+  @keyframes whiskers-twitch {
+    0%, 35% { transform: rotate(0deg); }
+    40% { transform: rotate(3deg); }
+    45% { transform: rotate(-3deg); }
+    50%, 100% { transform: rotate(0deg); }
+  }
+
+  /* TEXT */
+  .message-container {
+    margin-top: 2rem;
+  }
+
+  .fade-text {
+    color: #9ca3af;
+    font-size: 1.25rem;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .home-btn {
+    background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(96, 165, 250, 0.25);
+  }
+
+  .home-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(96, 165, 250, 0.35);
+  }
+
+  .archive-btn {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+    color: #60a5fa;
+    border: 2px solid rgba(96, 165, 250, 0.25);
+  }
+
+  .archive-btn:hover {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%);
+    border-color: rgba(96, 165, 250, 0.4);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  @media (max-width: 640px) {
+    .cat-404-container {
+      padding: 1rem;
+    }
+
+    .fade-text {
+      font-size: 1rem;
+    }
+
+    .actions {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .action-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

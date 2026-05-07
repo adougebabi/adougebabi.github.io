@@ -23,10 +23,10 @@ const isImageUrl = (str: string): boolean => {
   return /^\/.*\.(png|jpg|jpeg|gif|svg|webp)$/i.test(str);
 };
 
-// 將 SimpleIcon 名稱轉換為 @icons-pack/react-simple-icons 的元件名稱
-// 注意：iconName 應該已經是符合套件匯出格式的 PascalCase，例如 "Github"、"X"、"Linkedin"
+// 将 SimpleIcon 名称转换为 @icons-pack/react-simple-icons 的组件名称
+// 注意：iconName 应该已经是符合套件导出格式的 PascalCase，例如 "Github"、"X"、"Linkedin"
 const getSimpleIconComponentName = (iconName: string): string => {
-  // 直接加上 "Si" 前綴，使用傳入的名稱，不再嘗試變更大小寫
+  // 直接加上 "Si" 前缀，使用传入的名称，不再尝试变更大小写
   return `Si${iconName}`;
 };
 
@@ -37,25 +37,50 @@ const DynamicIcon = ({
   iconName: string;
   size?: number;
 }) => {
-  // 使用 React.lazy 動態匯入對應的圖示
+  // 使用 React.lazy 动态导入对应的图标
   const IconComponent = useMemo(() => {
-    return lazy(() =>
-      import("@icons-pack/react-simple-icons")
-        .then((mod) => {
-          const componentName = getSimpleIconComponentName(iconName);
-          const Icon = mod[componentName as keyof typeof mod];
-          if (!Icon) throw new Error(`Icon ${componentName} not found`);
-          return { default: Icon as React.ComponentType<any> };
-        })
-        .catch(async () => {
-          // 找不到圖示時的降級處理（例如回傳一個預設圖示）
-          const mod = await import("lucide-react");
-          return {
-            default: mod.Earth,
-          };
-        }),
-    );
+    // 确保 iconName 不是空字符串或 undefined
+    if (!iconName || typeof iconName !== 'string') {
+      console.warn('Invalid iconName:', iconName);
+      return null;
+    }
+
+    // 检查是否是图片 URL，如果是则不使用动态导入
+    if (isImageUrl(iconName)) {
+      return null;
+    }
+
+    return lazy(async () => {
+      try {
+        const mod = await import("@icons-pack/react-simple-icons");
+        const componentName = getSimpleIconComponentName(iconName);
+        const Icon = mod[componentName as keyof typeof mod];
+
+        if (!Icon) {
+          console.warn(`Icon ${componentName} not found in @icons-pack/react-simple-icons, available icons:`, Object.keys(mod).filter(k => k.startsWith('Si')).slice(0, 10));
+          throw new Error(`Icon ${componentName} not found`);
+        }
+
+        return { default: Icon as React.ComponentType<any> };
+      } catch (error) {
+        // 找不到图标时的降级处理（例如回传一个预设图标）
+        console.warn(`Failed to load icon ${iconName}, using fallback:`, error);
+        const mod = await import("lucide-react");
+        return {
+          default: mod.Earth,
+        };
+      }
+    });
   }, [iconName]);
+
+  // 如果是图片 URL 或无效的 iconName，直接返回 null（由父组件处理）
+  if (!iconName || isImageUrl(iconName)) {
+    return null;
+  }
+
+  if (!IconComponent) {
+    return <div style={{ width: size, height: size }} />;
+  }
 
   return (
     <React.Suspense fallback={<div style={{ width: size, height: size }} />}>
