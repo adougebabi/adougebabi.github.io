@@ -23,6 +23,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 import rehypeKatex from "rehype-katex";
 import rehypePangu from "./src/plugins/rehype-pangu.mjs";
+import rehypeMermaid from "rehype-mermaid";
 
 import { asideAutoImport, astroAsides } from "./src/utils/astro-aside";
 import AutoImport from "astro-auto-import";
@@ -130,6 +131,7 @@ export default defineConfig({
       rehypeCodeBlock,
       rehypePangu,
       rehypeKatex,
+      rehypeMermaid,
     ],
   },
 });
