@@ -45,7 +45,7 @@ loadEnv();
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL || "https://sh-blog-next.vercel.app",
+  site: process.env.SITE_URL || "https://adougebabi-github-io.pages.dev",
   integrations: [
     AutoImport({
       imports: [asideAutoImport],
