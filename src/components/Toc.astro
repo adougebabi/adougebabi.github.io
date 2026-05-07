@@ -18,12 +18,12 @@ interface Props {
 
 const { headings } = Astro.props;
 
-// 清理文本：移除錨點符號
+// 清理文本：移除锚点符号
 const cleanHeadingText = (text: string): string => {
   return text.replace("#", "").trim();
 };
 
-// 構建樹形結構，根據 config 設定最小與最大深度
+// 构建树形结构，根据 config 设定最小与最大深度
 const minDepth = config.behavior.tableOfContents.minDepth;
 const maxDepth = config.behavior.tableOfContents.maxDepth;
 
@@ -81,7 +81,7 @@ const tocTree = headings.reduce(
                       className="toc-toggle shrink-0 w-5 h-5 flex items-center justify-center rounded hover:bg-slate-700 transition-colors"
                       data-toggle-target={`toc-children-${index}`}
                       type="button"
-                      aria-label={`展開 ${item.text} 的子項`}
+                      aria-label={`展开 ${item.text} 的子项`}
                       aria-expanded="false"
                       aria-controls={`toc-children-${index}`}
                       asChild
@@ -127,14 +127,14 @@ const tocTree = headings.reduce(
 <script is:inline define:vars={{ minDepth }}>
   let currentH2Index = null;
 
-  // 設置標題的滾動邊距，防止被 TOC 卡住
+  // 设置标题的滚动边距，防止被 TOC 卡住
   document
     .querySelectorAll("article :is(h2,h3,h4,h5,h6)")
     .forEach((heading) => {
       heading.style.scrollMarginTop = "90px";
     });
 
-  // 切換子項顯示/隱藏
+  // 切换子项显示/隐藏
   document.querySelectorAll(".toc-toggle").forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
@@ -146,17 +146,17 @@ const tocTree = headings.reduce(
       const isHidden = target.hasAttribute("hidden");
 
       if (isHidden) {
-        // 展開：先移除 hidden，觸發 reflow 後再設置 max-height
+        // 展开：先移除 hidden，触发 reflow 后再设置 max-height
         target.removeAttribute("hidden");
         target.querySelectorAll("a").forEach((link) => {
           link.removeAttribute("tabindex");
         });
-        // 強制 reflow 讓 display 變化生效
+        // 强制 reflow 让 display 变化生效
         void target.offsetHeight;
         target.style.maxHeight = "1000px";
         button.setAttribute("aria-expanded", "true");
       } else {
-        // 收合：先設置 max-height 觸發動畫，結束後再設置 hidden
+        // 收合：先设置 max-height 触发动画，结束后再设置 hidden
         target.style.maxHeight = "0px";
         button.setAttribute("aria-expanded", "false");
         setTimeout(() => {
@@ -167,7 +167,7 @@ const tocTree = headings.reduce(
         }, 400);
       }
 
-      // 旋轉箭頭
+      // 旋转箭头
       const chevron = button.querySelector("svg");
       if (chevron) {
         chevron.style.transform = isHidden ? "rotate(-180deg)" : "rotate(0deg)";
@@ -175,7 +175,7 @@ const tocTree = headings.reduce(
     });
   });
 
-  // 當用戶點擊某個標題時，自動展開其父項
+  // 当用户点击某个标题时，自动展开其父项
   document
     .querySelectorAll("article :is(h2,h3,h4,h5,h6)")
     .forEach((heading) => {
@@ -212,7 +212,7 @@ const tocTree = headings.reduce(
       });
     });
 
-  // 高亮當前閱讀位置並自動展開/關閉父項
+  // 高亮当前阅读位置并自动展开/关闭父项
   const setCurrent = (entries) => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
@@ -237,7 +237,7 @@ const tocTree = headings.reduce(
       const index = tocLink.getAttribute("data-heading-index");
       if (!index) return;
 
-      // 收起上一個 H2
+      // 收起上一个 H2
       if (currentH2Index && currentH2Index !== index) {
         const prevChildren = document.getElementById(
           `toc-children-${currentH2Index}`,
@@ -261,7 +261,7 @@ const tocTree = headings.reduce(
         }
       }
 
-      // 展開目前 H2
+      // 展开目前 H2
       const currentChildren = document.getElementById(`toc-children-${index}`);
       if (currentChildren && currentChildren.hasAttribute("hidden")) {
         currentChildren.removeAttribute("hidden");

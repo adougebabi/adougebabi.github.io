@@ -2,15 +2,15 @@
 import ToComment from "./ToComment.astro";
 import ToTop from "./ToTop.astro";
 
-// 透過網址是否在/blog/ 判斷是否為部落格頁面
+// 通过网址是否在/blog/ 判断是否为博客页面
 const IS_BLOG = Astro.url.pathname.startsWith("/blog/");
 ---
 
 <div
-  class="fixed right-2 bottom-12 z-50 flex -translate-x-1/2 flex-col items-center gap-4 lg:right-8 lg:bottom-40 lg:translate-x-0 lg:-rotate-90 lg:flex-row-reverse"
+  class="fixed right-2 bottom-12 z-50 flex -translate-x-1/2 flex-col items-center gap-4 lg:right-20 lg:bottom-40 lg:translate-x-0 lg:-rotate-90 lg:flex-row-reverse"
 >
   <ToTop />
 
-  <!-- 只在部落格頁面顯示留言按鈕 -->
+  <!-- 只在博客页面显示留言按钮 -->
   {IS_BLOG && <ToComment />}
 </div>

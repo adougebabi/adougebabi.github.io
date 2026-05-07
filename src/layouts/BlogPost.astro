@@ -47,9 +47,9 @@ const { title, description, pubDate, updatedDate, heroImage, headings, tags } =
 <BaseLayout
   title={`${title} ${SEPARATOR} ${config.title}`}
   description={description}
-  coverImage={heroImage}
+  coverImage={heroImage || DEFAULT_POST_IMAGE}
 >
-  <!-- 內容 -->
+  <!-- 内容 -->
   <Hero backgroundImage={heroImage || DEFAULT_POST_IMAGE}>
     <!-- Left: Main heading -->
     <div class="lg:col-span-2" slot="left">
@@ -64,7 +64,7 @@ const { title, description, pubDate, updatedDate, heroImage, headings, tags } =
     <!-- Main column: Blog post content -->
     <article data-pagefind-body class="w-full max-w-full min-w-0 flex-1">
       <div>
-        <!-- 文章資訊 -->
+        <!-- 文章信息 -->
         <div class="mb-4 flex gap-2" data-pagefind-ignore>
           <!-- 文章日期 -->
           <time
@@ -91,7 +91,7 @@ const { title, description, pubDate, updatedDate, heroImage, headings, tags } =
           </div>
         </div>
 
-        <!-- 文章標籤 -->
+        <!-- 文章标签 -->
         {
           tags && tags.length > 0 && (
             <div class="mb-4 flex gap-2" data-pagefind-ignore>
@@ -107,7 +107,7 @@ const { title, description, pubDate, updatedDate, heroImage, headings, tags } =
         }
       </div>
 
-      <!-- 文章圖片 -->
+      <!-- 文章图片 -->
       <div class="overflow-hidden rounded-xl">
         {
           (heroImage && (
@@ -129,7 +129,7 @@ const { title, description, pubDate, updatedDate, heroImage, headings, tags } =
           )
         }
       </div>
-      <!-- 文章內容 -->
+      <!-- 文章内容 -->
       <div class="mt-10" id="post-content">
         <slot />
       </div>
