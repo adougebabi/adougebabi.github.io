@@ -426,23 +426,166 @@ import { defineConfig } from "@/utils/define-config";
 // };
 
 const config = defineConfig({
-  behavior: {
-    commentConfig: {
-      enableComment: "Giscus",
-      giscusConfig: {
-        repo: "510208/utterances",
-        repoId: "R_kgDOKOthQw",
-        category: "Announcements",
-        categoryId: "DIC_kwDOKOthQ84Czwi8",
-        mapping: "og:title",
-        strict: "0",
-        reactionsEnabled: "1",
-        emitMetadata: "1",
-        inputPosition: "top",
-        theme: "transparent_dark",
-        lang: "zh-TW",
+  // 网站基本信息
+  title: "阿兜哥爸爸的博客",
+  description: "专注于 Java、RPC 框架、分布式系统等技术领域的技术博客",
+  lang: "zh-CN",
+  siteLang: "zh_cn",
+  favicon: "/favicon.png",
+
+  // 页面设置
+  pages: {
+    home: {
+      title: "代码改变世界\n技术创造未来",
+      heroImage: "/assets/layouts/homepage/samhacker_homepage_background.webp",
+      greetings: [
+        {
+          begin: 0,
+          finish: 6,
+          text: "深夜好，该休息了！",
+        },
+        {
+          begin: 6,
+          finish: 12,
+          text: "早安！新的一天开始了！",
+        },
+        {
+          begin: 12,
+          finish: 14,
+          text: "午安！记得吃午餐哦！",
+        },
+        {
+          begin: 14,
+          finish: 18,
+          text: "下午好！工作顺利吗？",
+        },
+        {
+          begin: 18,
+          finish: 21,
+          text: "傍晚好！准备迎接夜晚了！",
+        },
+        {
+          begin: 21,
+          finish: 24,
+          text: "晚安！祝你有个好梦！",
+        },
+        {
+          text: "你好！",
+        },
+      ],
+    },
+    blog: {
+      title: "技术文章",
+      subTitle: "记录技术成长的点点滴滴\n分享编程路上的经验与思考",
+      heroImage: "/assets/layouts/homepage/samhacker_homepage_background.webp",
+    },
+    other: {
+      search: {
+        title: "站内搜索",
+        subTitle: "搜索你想寻找的内容...",
+        heroImage: "/assets/layouts/homepage/samhacker_homepage_background.webp",
+      },
+      friends: {
+        title: "友情链接",
+        subTitle: "这里是我的一些朋友或推荐的网站清单",
+        heroImage: "/assets/layouts/homepage/samhacker_homepage_background.webp",
+      },
+      about: {
+        title: "关于我",
+        subTitle: "这里是关于我与这个网站的介绍页面",
+        heroImage: "/assets/layouts/homepage/samhacker_homepage_background.webp",
       },
     },
+  },
+
+  // 风格设置
+  style: {
+    heroImage: {
+      from: 80,
+      to: 100,
+      src: "/assets/layouts/homepage/samhacker_homepage_background.webp",
+      method: "overlay",
+    },
+    defaultPostImage: "/assets/layouts/homepage/samhacker_homepage_background.webp",
+    postsPerPage: 6,
+    titleSeparator: "-",
+    enableTransitions: true,
+    enableRecentPosts: true,
+  },
+
+  // 作者信息
+  author: {
+    name: "笨叔丶",
+    bio: "专注于 Java、RPC 框架、分布式系统等技术领域的后端工程师",
+    email: "your-email@example.com", // 请替换为你的邮箱
+    avatarUrl: "https://gravatar.com/avatar/default?size=256&d=identicon",
+    links: [
+      {
+        icon: "Github",
+        to: "https://github.com/adougebabi",
+        label: "GitHub",
+      },
+    ],
+  },
+
+  // 导航栏
+  navBar: {
+    links: [
+      {
+        title: "首页",
+        href: "/",
+        icon: Home,
+      },
+      {
+        title: "博客",
+        href: "/blog",
+        icon: Newspaper,
+      },
+      {
+        title: "关于",
+        href: "/about",
+        icon: Info,
+      },
+    ],
+  },
+
+  // 友情链接（暂时为空，可以后续添加）
+  friendLinks: [],
+
+  // 行为设置
+  behavior: {
+    commentConfig: {
+      enableComment: false, // 暂时关闭评论，需要时可以配置 Giscus
+    },
+    enableGTM: false,
+    enable404EasterEgg: true,
+    tableOfContents: {
+      enable: true,
+      minDepth: 2,
+      maxDepth: 4,
+    },
+    rss: {
+      enable: true,
+      protectContent: false,
+      enableStylesheet: true,
+    },
+  },
+
+  // 页脚设置
+  footer: {
+    description: "欢迎来到我的技术博客\n这里记录我的技术成长与思考\n希望能对你有所帮助",
+    links: [
+      {
+        socialMedia: "Github",
+        url: "https://github.com/adougebabi",
+      },
+    ],
+    copyright: {
+      text: "CC BY-NC 4.0",
+      url: "https://creativecommons.org/licenses/by-nc/4.0/",
+      yearUpdateStrategy: "auto",
+    },
+    countryEmoji: "🇨🇳",
   },
 }); // 使用 defineConfig 函式定義設定，並提供部分覆蓋設定
 
