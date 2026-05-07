@@ -22,6 +22,7 @@ import Toc from "@components/Toc.astro";
 import "katex/dist/katex.min.css";
 import Comment from "@components/comment/Comment.astro";
 import Tags from "@components/Tags.astro";
+import MermaidInit from "@components/MermaidInit.astro";
 
 import i18n from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
@@ -147,6 +148,9 @@ const { title, description, pubDate, updatedDate, heroImage, headings, tags } =
       }
     </aside>
   </BaseMainContent>
+
+  <!-- Mermaid 初始化 -->
+  <MermaidInit />
 </BaseLayout>
 
 <script>
