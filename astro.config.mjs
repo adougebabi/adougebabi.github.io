@@ -46,6 +46,9 @@ loadEnv();
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL || "https://adougebabi-github-io.pages.dev",
+  image: {
+    domains: ["raw.giteeusercontent.com"],
+  },
   integrations: [
     AutoImport({
       imports: [asideAutoImport],
