@@ -2,7 +2,7 @@
 title: Hexo 博客搭建
 description: 使用 Hexo 和 GitHub Pages 搭建个人博客的完整流程记录
 pubDate: 2020-08-26T10:43:20.000Z
-heroImage: https://raw.giteeusercontent.com/Semiramis/oss/raw/master/2020/09/15/pexels-irina-iriser-1408221.jpg
+heroImage: https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1200
 category: ["教程"]
 draft: false
 tags:

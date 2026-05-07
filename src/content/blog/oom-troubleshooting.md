@@ -2,7 +2,7 @@
 title: 记录一次OOM解决过程
 description: 公司项目运行太久就OOM的排查与解决过程，涉及 ehcache 和 Hibernate 查询计划缓存的内存泄漏问题
 pubDate: 2020-09-15T10:50:45.000Z
-heroImage: https://raw.giteeusercontent.com/Semiramis/oss/raw/master/2020/09/15/pexels-moose-photos-1037992.jpg
+heroImage: https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200
 category: ["工作经验"]
 draft: false
 tags:

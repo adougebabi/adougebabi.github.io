@@ -8,7 +8,26 @@ const isImageUrl = (str: string): boolean => {
 
 type LinkItem = (typeof config.footer.links)[number];
 
-const resolvedLinks = config.footer.links.map((link: LinkItem) => {
+// 动态导入图标
+const iconModules = await Promise.all(
+  config.footer.links.map(async (link: LinkItem) => {
+    const { socialMedia } = link;
+
+    if (typeof socialMedia === "string" && !isImageUrl(socialMedia)) {
+      try {
+        const mod = await import("simple-icons-astro");
+        const IconComponent = mod[socialMedia as keyof typeof mod];
+        return IconComponent || null;
+      } catch (error) {
+        console.warn(`Failed to load icon ${socialMedia}:`, error);
+        return null;
+      }
+    }
+    return null;
+  })
+);
+
+const resolvedLinks = config.footer.links.map((link: LinkItem, index: number) => {
   const { socialMedia } = link;
 
   if (typeof socialMedia === "string") {
@@ -21,11 +40,12 @@ const resolvedLinks = config.footer.links.map((link: LinkItem) => {
       };
     }
 
+    // 使用动态导入的图标
     return {
       ...link,
-      kind: "image" as const,
-      src: socialMedia,
-      IconComponent: null,
+      kind: "icon" as const,
+      src: "",
+      IconComponent: iconModules[index],
     };
   }
 

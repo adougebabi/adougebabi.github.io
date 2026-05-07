@@ -2,7 +2,7 @@
 title: 从零开始写RPC框架-02
 description: 实现 RPC 框架的动态代理功能，使用 CGLIB 和 Spring 实现远程方法调用
 pubDate: 2020-09-07T10:18:24.000Z
-heroImage: https://raw.giteeusercontent.com/Semiramis/oss/raw/master/2020/09/15/pexels-pratik-gupta-2748716.jpg
+heroImage: https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200
 category: ["技术实践"]
 draft: false
 tags:

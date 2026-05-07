@@ -1,6 +1,5 @@
 import { Newspaper, Handshake, Home, Info, Phone } from "lucide-react";
 import type { ShBlogConfig } from "../types/shblog.config.d";
-import { Github } from "simple-icons-astro";
 
 const defaultConfig: ShBlogConfig = {
   title: "My Open Source Blog",
@@ -161,11 +160,11 @@ const defaultConfig: ShBlogConfig = {
     },
   },
 
-  // 頁尾設定
+  // 页脚设定
   footer: {
     description:
-      "感謝你的造訪。\n本站致力於提供高品質的內容分享。\n如果喜歡這裡，歡迎關注我的社交媒體。",
-    links: [{ socialMedia: Github, url: "https://github.com/" }],
+      "感谢你的造访。\n本站致力于提供高品质的内容分享。\n如果喜欢这里，欢迎关注我的社交媒体。",
+    links: [{ socialMedia: "Github", url: "https://github.com/" }],
     copyright: {
       text: "CC BY-NC 4.0", // 版權使用說明文字
       url: "https://creativecommons.org/licenses/by-nc/4.0/", // 版權使用說明連結網址（e.g. 創用CC、MIT、GPL 等等）

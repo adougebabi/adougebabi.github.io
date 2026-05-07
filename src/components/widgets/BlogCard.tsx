@@ -1,11 +1,10 @@
-"use client";
-
 import { Card, CardContent, CardHeader } from "@ui/card.tsx";
 import { Tag } from "lucide-react";
 import Tags from "@ui/Tags.tsx";
 import { useEffect, useState } from "react";
 import config from "@shConfig";
 import { CalendarDaysIcon } from "@ui/animated/calendar-days.tsx";
+import { DEFAULT_POST_IMAGE } from "@/consts.ts";
 
 import { navigate } from "astro:transitions/client";
 
@@ -32,6 +31,12 @@ export default function BlogCard({
 }: BlogCardProps) {
   const [formattedDate, setFormattedDate] = useState<string>("");
   const [isHydrated, setIsHydrated] = useState(false);
+  const [imgError, setImgError] = useState(false);
+
+  // 确保 heroImage 有有效值
+  const validHeroImage = heroImage || DEFAULT_POST_IMAGE;
+  // 如果图片加载失败，使用默认图片
+  const displayImage = imgError ? DEFAULT_POST_IMAGE : validHeroImage;
 
   useEffect(() => {
     const date = new Date(pubDate);
@@ -44,6 +49,11 @@ export default function BlogCard({
     );
     setIsHydrated(true);
   }, [pubDate]);
+
+  const handleImageError = () => {
+    console.warn(`[BlogCard] 图片加载失败: ${validHeroImage}`);
+    setImgError(true);
+  };
 
   const handleCardClick = () => {
     if (config.style.enableTransitions) {
@@ -64,14 +74,15 @@ export default function BlogCard({
           isLoading ? "bg-neutral-800" : "bg-neutral-900"
         } group relative flex h-full flex-col`}
       >
-        {/* 背景圖層 */}
-        {!isLoading && heroImage && (
+        {/* 背景图层 */}
+        {!isLoading && displayImage && (
           <div className="absolute inset-0 z-0 overflow-hidden rounded-[14px]">
             <img
-              src={heroImage}
+              src={displayImage}
               alt=""
               role="presentation"
               className="h-full w-full scale-110 object-cover opacity-10 blur-[20px] transition-all duration-300 group-hover:opacity-15 group-hover:blur-[3px]"
+              onError={handleImageError}
             />
           </div>
         )}
@@ -79,11 +90,12 @@ export default function BlogCard({
         <CardHeader className="relative z-10 p-0 pb-0">
           {/* Image */}
           <div className="h-50 overflow-hidden bg-neutral-700">
-            {!isLoading && heroImage && (
+            {!isLoading && displayImage && (
               <img
-                src={heroImage}
+                src={displayImage}
                 alt={title}
                 className="h-full w-full object-cover"
+                onError={handleImageError}
               />
             )}
           </div>
