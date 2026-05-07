@@ -427,8 +427,8 @@ import { defineConfig } from "@/utils/define-config";
 
 const config = defineConfig({
   // 网站基本信息
-  title: "阿兜哥爸爸的博客",
-  description: "专注于 Java、RPC 框架、分布式系统等技术领域的技术博客",
+  title: "阿兜咪爸爸的技术博客",
+  description: "专注于微服务架构、分布式系统、高并发调优等技术领域的深度分享",
   lang: "zh-CN",
   siteLang: "zh_cn",
   favicon: "/favicon.png",
@@ -515,9 +515,9 @@ const config = defineConfig({
 
   // 作者信息
   author: {
-    name: "笨叔丶",
-    bio: "专注于 Java、RPC 框架、分布式系统等技术领域的后端工程师",
-    email: "your-email@example.com", // 请替换为你的邮箱
+    name: "阿兜咪爸爸",
+    bio: "后端技术负责人/架构师，专注于微服务架构、分布式系统、高并发调优等技术领域。精通 Spring Cloud Alibaba 生态，具备丰富的系统架构设计与性能优化经验。",
+    email: "646911949@qq.com",
     avatarUrl: "https://gravatar.com/avatar/default?size=256&d=identicon",
     links: [
       {
@@ -573,7 +573,7 @@ const config = defineConfig({
 
   // 页脚设置
   footer: {
-    description: "欢迎来到我的技术博客\n这里记录我的技术成长与思考\n希望能对你有所帮助",
+    description: "欢迎来到我的技术博客\n分享微服务架构、分布式系统、性能优化等实战经验\n希望这些技术沉淀能对你有所帮助",
     links: [
       {
         socialMedia: "Github",

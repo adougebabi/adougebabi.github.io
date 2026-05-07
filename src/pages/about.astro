@@ -11,61 +11,64 @@ import config from "@shConfig";
   headings={[]}
 >
   <div class="mb-16">
-    <h2 class="mb-4 text-2xl font-bold">我是誰</h2>
+    <h2 class="mb-4 text-2xl font-bold">关于我</h2>
     <p class="content-text">
-      嗨！我是 SamHacker，一個熱愛 Coding 的高中生。現年（2025年）16歲，善於運用
-      <a href="https://www.typescriptlang.org/">TypeScript</a>、
-      <a href="https://www.python.org/">Python</a>
-      等語言。最近在學習
-      <a href="https://nextjs.org/">Next.js</a>、
-      <a href="https://vitejs.dev/">Vite</a>、
-      <a href="https://reactjs.org/">React</a>、
-      <a href="https://greensock.com/gsap/">GSAP</a>
-      等前端框架，也計畫要涉獵 Svelte、Vue 等框架。前端可能還算可以，但做後端就真的完全不行。
+      你好！我是阿兜咪爸爸，目前担任后端技术负责人/架构师，拥有 8 年以上的 Java 后端开发经验。
+      我专注于微服务架构、分布式系统、高并发调优等技术领域，对技术有着持续的热情和追求。
     </p>
     <p class="content-text">
-      未來可能會去學習
-      <a href="https://laravel.com/">Laravel</a>、
-      <a href="https://www.djangoproject.com/">Django</a>
-      等後端框架，充實自己的能力。我對網頁前端設計、Python 腳本、AI 與 AIGC 等領域有些興趣。
-      <br />
-      雖然技術仍然不足以稱為專家，但如果你也對這些領域有興趣，或許我們可以一起交流？
+      在技术栈方面，我精通 <strong>Spring Cloud Alibaba</strong> 生态体系，包括 Nacos、Sentinel、Seata 等组件；
+      深入理解 JVM 内存模型与 GC 机制，具备丰富的性能调优经验；
+      熟练掌握 MySQL 索引优化、主从复制、读写分离、分库分表等数据库架构设计；
+      在消息中间件（RabbitMQ）、缓存架构（Redis）、容器化部署（Docker/K8s）等方面也有深入实践。
     </p>
     <p class="content-text">
-      至於如果你想知道為什麼我叫 SamHacker
-      嘛...主要就只是因為之前中二病時期感覺當駭客很帥（？），然後 Sam
-      一直是我的英文名字，兩個隨便組合一下就出現這個名字了。
+      我主导过多个大型项目的架构设计与重构工作，包括：
+    </p>
+    <ul class="content-text list-disc pl-6 space-y-2">
+      <li><strong>心理咨询服务平台</strong>：基于 DDD 将单体系统重构为 12 个微服务，核心接口 P99 延迟从 1.5s 降至 200ms，系统吞吐量提升 300%</li>
+      <li><strong>企业级动态流量网关</strong>：基于 OpenResty 构建支持全链路泳道隔离的 API 网关，支撑 10+ 条业务线并行开发，研发效能提升 50%</li>
+      <li><strong>SaaS 电商交易中台</strong>：抽象统一交易域能力，设计高并发防超卖方案，支撑日均万级订单量</li>
+      <li><strong>基于 MCP 的交易研究 Agent 平台</strong>：打通"分析-监控-复盘-策略验证"全链路，建立标准化 AI Agent 接入能力</li>
+    </ul>
+    <p class="content-text">
+      除了技术工作，我也注重团队建设与技术传承。带领过 5-10 人的研发团队，推行 Code Review、CI/CD 规范，
+      处理线上重大故障复盘，有效治理历史技术债。我相信好的技术不仅要能解决问题，更要能沉淀为可复用的能力。
     </p>
     <p class="content-text">
-      以前的名字是 510208，學校發的 ST
-      網域郵件用這個數字當帳號，但因為有些平台不收純數字的帳號，所以就改成現在這個名字了。
-    </p>
-    <p class="content-text">
-      另外如果你想知道的話，我還有一個虛擬身分御坂糸紗奈（Misaka Misana，a.k.a.
-      林韻恩），純粹都只是隨便亂取的名字。依據著名的「網路上遇到自稱女生的大多都是小男娘居多」的定律，反正那說的不是我。
+      近年来，我也在积极探索 AI 辅助编程工具（Claude Code / Codex）在研发效能提升方面的应用，
+      并将云原生、可观测性（OpenTelemetry + Prometheus + Grafana）等新技术融入到实际项目中。
     </p>
   </div>
   <div class="mb-16">
-    <h2 class="mb-4 text-2xl font-bold">關於這個網站</h2>
+    <h2 class="mb-4 text-2xl font-bold">关于这个博客</h2>
     <p class="content-text">
-      同樣的網址，我所製作的第一個網站是採用純粹的 HTML、CSS 與 JavaScript
-      所建構的，並沒有使用任何框架或庫。
-      但很遺憾的，不才是個非常之大懶蟲，手寫靜態網站應該會寫到死掉，所以決定痛定思痛，邁出腳步探索更強大的框架。
+      这个博客是我记录技术成长、分享实战经验的地方。在这里，你可以看到我在微服务架构、分布式系统、
+      性能优化等方面的思考与实践总结。
     </p>
     <p class="content-text">
-      於是我選擇了 Astro
-      作為我的網站框架，因為它輕量且易於使用，並且支援多種前端框架的整合，讓我能夠更靈活地開發網站功能。
-      這個網站的第一個版本是在 2021 年 8 月 8
-      日開始開發的，當時我還只是個國中生。
+      我相信技术的价值在于分享与传承。每一次架构设计、每一次性能调优、每一次故障排查，
+      都是宝贵的经验积累。通过博客的形式将这些经验沉淀下来，不仅能帮助自己梳理思路，
+      也希望能为同行提供一些参考和启发。
     </p>
     <p class="content-text">
-      用框架開發的第一個版本是使用 Vite + React
-      開發，沒有任何多重頁面路由，純粹一個網站，甚至連捲動都不能捲動，當然更遑論動畫什麼的，那叫奢望。
+      博客采用 <a href="https://astro.build/">Astro</a> 框架构建，这是一个现代化的静态站点生成器，
+      轻量、快速且易于维护。网站部署在 Cloudflare Pages 上，享受全球 CDN 加速带来的极致访问体验。
     </p>
     <p class="content-text">
-      當時是國三，畢竟還要準備考高中什麼的，根本沒時間完善我的個人網站。
-      因此這些完善內容的工作就交給了會考完的我。
-      專案做了將近兩個月，最終也算是有了一些進展，也就是現在你們看到的這個網站。
+      如果你对文章内容有任何疑问或建议，欢迎通过邮件（646911949@qq.com）或 GitHub 与我交流。
+      让我们一起在技术的道路上不断前行！
     </p>
+  </div>
+  <div class="mb-16">
+    <h2 class="mb-4 text-2xl font-bold">技术栈</h2>
+    <div class="content-text space-y-3">
+      <p><strong>后端框架：</strong>Spring Boot, Spring Cloud Alibaba, Nacos, Sentinel, Seata</p>
+      <p><strong>数据库：</strong>MySQL (索引优化、主从复制、读写分离、分库分表), Redis Cluster</p>
+      <p><strong>消息中间件：</strong>RabbitMQ (消息可靠性、顺序消息、流量削峰)</p>
+      <p><strong>云原生：</strong>Docker, Kubernetes, Helm, OpenTelemetry, Prometheus, Grafana</p>
+      <p><strong>网关技术：</strong>Spring Cloud Gateway, OpenResty (Lua), Nginx</p>
+      <p><strong>开发工具：</strong>Git, Jenkins, Arthas, AI 辅助编程 (Claude Code / Codex)</p>
+    </div>
   </div>
 </Layout>
